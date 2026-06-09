@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Pretendard Variable', -apple-system, sans-serif;
+  width: 1080px; height: 1080px;
+  background: #0D1117;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+/* Gradient orbs */
+.orb1 { position: absolute; width: 600px; height: 600px; background: #00D2C8; border-radius: 50%; filter: blur(120px); opacity: 0.2; top: -15%; left: -15%; }
+.orb2 { position: absolute; width: 500px; height: 500px; background: #8B5CF6; border-radius: 50%; filter: blur(100px); opacity: 0.15; bottom: -10%; right: -10%; }
+
+.content { position: relative; z-index: 1; text-align: center; padding: 60px; }
+
+.badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #00D2C8, #3182F6);
+  color: #fff; font-size: 20px; font-weight: 700;
+  padding: 10px 28px; border-radius: 30px;
+  margin-bottom: 48px; letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 64px; font-weight: 800; color: #F0F6FC;
+  line-height: 1.3; letter-spacing: -2px; margin-bottom: 32px;
+}
+h1 .highlight {
+  background: linear-gradient(90deg, #00D2C8, #3182F6, #8B5CF6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pain-list {
+  display: flex; flex-direction: column; gap: 20px;
+  margin-bottom: 56px;
+}
+.pain-item {
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 20px 28px;
+  font-size: 26px; color: #8B949E; font-weight: 500;
+}
+.pain-item .emoji { font-size: 32px; }
+.pain-item .strike { text-decoration: line-through; color: #6E7681; }
+
+.solution {
+  font-size: 36px; font-weight: 800; color: #F0F6FC;
+  margin-bottom: 48px;
+}
+.solution .app-name {
+  background: linear-gradient(90deg, #00D2C8, #3182F6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta-row {
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+}
+.app-icon {
+  width: 72px; height: 72px; border-radius: 18px;
+  background: linear-gradient(135deg, #00D2C8, #3182F6, #8B5CF6);
+  display: flex; align-items: center; justify-content: center;
+}
+.app-icon svg { width: 40px; height: 40px; fill: #fff; }
+.cta-text { text-align: left; }
+.cta-text .name { font-size: 28px; font-weight: 800; color: #F0F6FC; }
+.cta-text .sub { font-size: 18px; color: #8B949E; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="orb1"></div>
+<div class="orb2"></div>
+<div class="content">
+  <div class="badge">총무님 공감 100%</div>
+  <h1>아직도 이렇게<br><span class="highlight">모임 관리</span>하세요?</h1>
+  <div class="pain-list">
+    <div class="pain-item">
+      <span class="emoji">📊</span>
+      <span class="strike">엑셀로 회비 정리</span>
+    </div>
+    <div class="pain-item">
+      <span class="emoji">💬</span>
+      <span class="strike">카톡으로 돈 걷기</span>
+    </div>
+    <div class="pain-item">
+      <span class="emoji">🤯</span>
+      <span class="strike">누가 냈는지 기억하기</span>
+    </div>
+  </div>
+  <div class="solution"><span class="app-name">모이다</span> 하나로 끝.</div>
+  <div class="cta-row">
+    <div class="app-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+    </div>
+    <div class="cta-text">
+      <div class="name">모이다 — 무료 다운로드</div>
+      <div class="sub">App Store에서 지금 바로</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
