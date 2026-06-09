@@ -19,7 +19,7 @@
     background:radial-gradient(circle,#8B5CF6 0%,transparent 70%);
     filter:blur(80px);opacity:0.2;z-index:0;pointer-events:none;
   }
-  .caption{padding-top:100px;text-align:center;margin-bottom:48px;position:relative;z-index:1}
+  .caption{padding-top:80px;text-align:center;margin-bottom:32px;position:relative;z-index:1}
   .tag{
     display:inline-block;background:rgba(255,255,255,0.08);
     backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);
@@ -33,7 +33,10 @@
   }
   .caption p{font-size:30px;color:rgba(255,255,255,0.45);font-weight:400;margin-top:16px;letter-spacing:-0.5px}
   .phone{
-    width:1040px;background:#fff;border-radius:56px;
+    width:1200px;background:#fff;border-radius:52px 52px 0 0;
+    box-shadow:0 -8px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.06);
+    position:relative;z-index:1;
+    display:flex;flex-direction:column;
     box-shadow:0 20px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.06),0 0 160px #8B5CF622;
     overflow:hidden;position:relative;z-index:1;
   }
@@ -44,7 +47,7 @@
   .app-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 36px 16px;font-size:34px;font-weight:700;background:#fff}
   .app-bar-left{display:flex;align-items:center;gap:16px}
   .app-bar-right{display:flex;align-items:center;gap:24px;font-size:32px}
-  .content{padding:0 32px 32px;background:#F5F5F7}
+  .content{padding:0 32px 32px;background:#F5F5F7;flex:1}
   .banner{background:linear-gradient(135deg,#00D2C8,#3182F6,#8B5CF6);border-radius:24px;padding:36px 32px;color:#fff;margin-bottom:20px}
   .banner-title{font-size:34px;font-weight:800}
   .banner-row{display:flex;align-items:center;gap:12px;margin-top:12px}
@@ -58,8 +61,8 @@
   .fee-label{font-size:26px;color:#8B95A1}
   .fee-value{font-size:30px;font-weight:700;color:#00D2C8;margin-top:4px}
   .fee-arrow{font-size:28px;color:#8B95A1}
-  .notice-item{display:flex;justify-content:space-between;align-items:center}
-  .notice-title{font-size:28px;font-weight:600}
+  .bottom-nav{display:flex;justify-content:space-around;align-items:center;
+      padding:20px 0 36px;background:#fff;border-top:1px solid #E5E8EB;margin-top:auto;}
   .notice-date{font-size:24px;color:#8B95A1}
   .notice-accent{width:5px;height:40px;background:linear-gradient(180deg,#00D2C8,#3182F6);border-radius:3px;margin-right:16px}
   .schedule-item{display:flex;align-items:center;gap:20px;padding:10px 0}
@@ -175,6 +178,29 @@
     <div class="amount-card"><div class="amount-label">걷은 금액</div><div class="amount-value">600,000원 <span class="amount-total">/ 800,000원</span></div></div>
     <div class="btn-row"><div class="btn-outlined">📋 장부</div><div class="btn-outlined">▶ 고지서</div></div>
     <div class="btn-full">📊 회원 납부 현황 상세</div>
+    <div class="card" style="margin-top:4px">
+      <div class="card-header"><span class="card-title">회원별 현황</span></div>
+      <div style="display:flex;align-items:center;padding:12px 0;border-bottom:1px solid #F2F4F6">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#4f46e5;margin-right:14px">김</div>
+        <span style="flex:1;font-size:26px;font-weight:600">김민수</span>
+        <span style="font-size:22px;font-weight:700;padding:4px 14px;border-radius:10px;background:#ecfdf5;color:#059669">납부</span>
+      </div>
+      <div style="display:flex;align-items:center;padding:12px 0;border-bottom:1px solid #F2F4F6">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#4f46e5;margin-right:14px">이</div>
+        <span style="flex:1;font-size:26px;font-weight:600">이영희</span>
+        <span style="font-size:22px;font-weight:700;padding:4px 14px;border-radius:10px;background:#ecfdf5;color:#059669">납부</span>
+      </div>
+      <div style="display:flex;align-items:center;padding:12px 0;border-bottom:1px solid #F2F4F6">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#4f46e5;margin-right:14px">박</div>
+        <span style="flex:1;font-size:26px;font-weight:600">박지훈</span>
+        <span style="font-size:22px;font-weight:700;padding:4px 14px;border-radius:10px;background:#fef3c7;color:#d97706">확인중</span>
+      </div>
+      <div style="display:flex;align-items:center;padding:12px 0">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#4f46e5;margin-right:14px">정</div>
+        <span style="flex:1;font-size:26px;font-weight:600">정태준</span>
+        <span style="font-size:22px;font-weight:700;padding:4px 14px;border-radius:10px;background:#fee2e2;color:#dc2626">미납</span>
+      </div>
+    </div>
   </div>
   <div class="bottom-nav">
     <div class="nav-item"><div class="nav-icon">🏠</div><span class="nav-label">홈</span></div>

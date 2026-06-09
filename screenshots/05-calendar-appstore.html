@@ -19,7 +19,7 @@
     background:radial-gradient(circle,#3B82F6 0%,transparent 70%);
     filter:blur(80px);opacity:0.2;z-index:0;pointer-events:none;
   }
-  .caption{padding-top:100px;text-align:center;margin-bottom:48px;position:relative;z-index:1}
+  .caption{padding-top:80px;text-align:center;margin-bottom:32px;position:relative;z-index:1}
   .tag{
     display:inline-block;background:rgba(255,255,255,0.08);
     backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);
@@ -33,7 +33,10 @@
   }
   .caption p{font-size:30px;color:rgba(255,255,255,0.45);font-weight:400;margin-top:16px;letter-spacing:-0.5px}
   .phone{
-    width:1040px;background:#fff;border-radius:56px;
+    width:1200px;background:#fff;border-radius:52px 52px 0 0;
+    box-shadow:0 -8px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.06);
+    position:relative;z-index:1;
+    display:flex;flex-direction:column;
     box-shadow:0 20px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.06),0 0 160px #3B82F622;
     overflow:hidden;position:relative;z-index:1;
   }
@@ -44,7 +47,7 @@
   .app-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 36px 16px;font-size:34px;font-weight:700;background:#fff}
   .app-bar-left{display:flex;align-items:center;gap:16px}
   .app-bar-right{display:flex;align-items:center;gap:24px;font-size:32px}
-  .content{padding:0 32px 32px;background:#F5F5F7}
+  .content{padding:0 32px 32px;background:#F5F5F7;flex:1}
   .banner{background:linear-gradient(135deg,#00D2C8,#3182F6,#8B5CF6);border-radius:24px;padding:36px 32px;color:#fff;margin-bottom:20px}
   .banner-title{font-size:34px;font-weight:800}
   .banner-row{display:flex;align-items:center;gap:12px;margin-top:12px}
@@ -58,8 +61,8 @@
   .fee-label{font-size:26px;color:#8B95A1}
   .fee-value{font-size:30px;font-weight:700;color:#00D2C8;margin-top:4px}
   .fee-arrow{font-size:28px;color:#8B95A1}
-  .notice-item{display:flex;justify-content:space-between;align-items:center}
-  .notice-title{font-size:28px;font-weight:600}
+  .bottom-nav{display:flex;justify-content:space-around;align-items:center;
+      padding:20px 0 36px;background:#fff;border-top:1px solid #E5E8EB;margin-top:auto;}
   .notice-date{font-size:24px;color:#8B95A1}
   .notice-accent{width:5px;height:40px;background:linear-gradient(180deg,#00D2C8,#3182F6);border-radius:3px;margin-right:16px}
   .schedule-item{display:flex;align-items:center;gap:20px;padding:10px 0}
@@ -176,6 +179,13 @@
       <div class="cal-event"><div class="cal-event-dot" style="background:#3182F6"></div><div><div class="cal-event-name">정기모임</div><div class="cal-event-date">6월 13일 · 10:00</div></div></div>
       <div class="cal-event"><div class="cal-event-dot" style="background:#10b981"></div><div><div class="cal-event-name">[경사] 홍길동 결혼식</div><div class="cal-event-date">6월 16일 · 종일</div></div></div>
       <div class="cal-event"><div class="cal-event-dot" style="background:#f59e0b"></div><div><div class="cal-event-name">회비 납부 마감일</div><div class="cal-event-date">6월 20일</div></div></div>
+      <div class="cal-event"><div class="cal-event-dot" style="background:#8B5CF6"></div><div><div class="cal-event-name">동창회 30주년 행사 준비</div><div class="cal-event-date">6월 22일 · 14:00</div></div></div>
+      <div class="cal-event"><div class="cal-event-dot" style="background:#ec4899"></div><div><div class="cal-event-name">[경사] 이영희 출산</div><div class="cal-event-date">6월 28일 · 종일</div></div></div>
+    </div>
+    <div style="padding:16px 28px;font-size:28px;font-weight:700;color:#191F28">지난 일정</div>
+    <div style="background:#F5F5F7;margin:8px 28px;border-radius:20px;opacity:0.6">
+      <div class="cal-event"><div class="cal-event-dot" style="background:#8B95A1"></div><div><div class="cal-event-name">5월 정기모임</div><div class="cal-event-date">5월 25일 · 10:00</div></div></div>
+      <div class="cal-event"><div class="cal-event-dot" style="background:#8B95A1"></div><div><div class="cal-event-name">5월 회비 납부 마감일</div><div class="cal-event-date">5월 20일</div></div></div>
     </div>
   </div>
   <div class="bottom-nav">

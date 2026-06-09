@@ -19,7 +19,7 @@
     background:radial-gradient(circle,#00D2C8 0%,transparent 70%);
     filter:blur(80px);opacity:0.2;z-index:0;pointer-events:none;
   }
-  .caption{padding-top:100px;text-align:center;margin-bottom:48px;position:relative;z-index:1}
+  .caption{padding-top:80px;text-align:center;margin-bottom:32px;position:relative;z-index:1}
   .tag{
     display:inline-block;background:rgba(255,255,255,0.08);
     backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);
@@ -33,7 +33,10 @@
   }
   .caption p{font-size:30px;color:rgba(255,255,255,0.45);font-weight:400;margin-top:16px;letter-spacing:-0.5px}
   .phone{
-    width:1040px;background:#fff;border-radius:56px;
+    width:1200px;background:#fff;border-radius:52px 52px 0 0;
+    box-shadow:0 -8px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.06);
+    position:relative;z-index:1;
+    display:flex;flex-direction:column;
     box-shadow:0 20px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.06),0 0 160px #00D2C822;
     overflow:hidden;position:relative;z-index:1;
   }
@@ -44,7 +47,7 @@
   .app-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 36px 16px;font-size:34px;font-weight:700;background:#fff}
   .app-bar-left{display:flex;align-items:center;gap:16px}
   .app-bar-right{display:flex;align-items:center;gap:24px;font-size:32px}
-  .content{padding:0 32px 32px;background:#F5F5F7}
+  .content{padding:0 32px 32px;background:#F5F5F7;flex:1}
   .banner{background:linear-gradient(135deg,#00D2C8,#3182F6,#8B5CF6);border-radius:24px;padding:36px 32px;color:#fff;margin-bottom:20px}
   .banner-title{font-size:34px;font-weight:800}
   .banner-row{display:flex;align-items:center;gap:12px;margin-top:12px}
@@ -58,8 +61,8 @@
   .fee-label{font-size:26px;color:#8B95A1}
   .fee-value{font-size:30px;font-weight:700;color:#00D2C8;margin-top:4px}
   .fee-arrow{font-size:28px;color:#8B95A1}
-  .notice-item{display:flex;justify-content:space-between;align-items:center}
-  .notice-title{font-size:28px;font-weight:600}
+  .bottom-nav{display:flex;justify-content:space-around;align-items:center;
+      padding:20px 0 36px;background:#fff;border-top:1px solid #E5E8EB;margin-top:auto;}
   .notice-date{font-size:24px;color:#8B95A1}
   .notice-accent{width:5px;height:40px;background:linear-gradient(180deg,#00D2C8,#3182F6);border-radius:3px;margin-right:16px}
   .schedule-item{display:flex;align-items:center;gap:20px;padding:10px 0}
@@ -174,6 +177,17 @@
       <div class="feed-body">동창회 30주년 기념 영상 만들어볼까요? 🎬</div>
       <div class="feed-img" style="background:linear-gradient(135deg,#fde68a,#fbbf24,#f59e0b);height:160px"></div>
       <div class="feed-actions"><span class="feed-action">❤️ 23</span><span class="feed-action">💬 9</span></div>
+    </div>
+    <div class="feed-post">
+      <div class="feed-header"><div class="feed-avatar" style="background:linear-gradient(135deg,#06b6d4,#22d3ee)"></div><div><div class="feed-name">최수진</div><div class="feed-time">2일 전</div></div></div>
+      <div class="feed-body">이번 달 회비 납부 완료했습니다! 💪<br>다음 정모에서 봐요~</div>
+      <div class="feed-actions"><span class="feed-action">❤️ 15</span><span class="feed-action">💬 3</span></div>
+    </div>
+    <div class="feed-post">
+      <div class="feed-header"><div class="feed-avatar" style="background:linear-gradient(135deg,#f97316,#fb923c)"></div><div><div class="feed-name">한소율</div><div class="feed-time">3일 전</div></div></div>
+      <div class="feed-body">지난 모임 단체 사진 올립니다 📸</div>
+      <div class="feed-img" style="background:linear-gradient(135deg,#c4b5fd,#a78bfa,#8b5cf6);height:180px"></div>
+      <div class="feed-actions"><span class="feed-action">❤️ 31</span><span class="feed-action">💬 12</span></div>
     </div>
   </div>
   <div class="bottom-nav">

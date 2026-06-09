@@ -19,7 +19,7 @@
     background:radial-gradient(circle,#3B82F6 0%,transparent 70%);
     filter:blur(80px);opacity:0.2;z-index:0;pointer-events:none;
   }
-  .caption{padding-top:100px;text-align:center;margin-bottom:48px;position:relative;z-index:1}
+  .caption{padding-top:80px;text-align:center;margin-bottom:32px;position:relative;z-index:1}
   .tag{
     display:inline-block;background:rgba(255,255,255,0.08);
     backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);
@@ -33,7 +33,10 @@
   }
   .caption p{font-size:30px;color:rgba(255,255,255,0.45);font-weight:400;margin-top:16px;letter-spacing:-0.5px}
   .phone{
-    width:1040px;background:#fff;border-radius:56px;
+    width:1200px;background:#fff;border-radius:52px 52px 0 0;
+    box-shadow:0 -8px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.06);
+    position:relative;z-index:1;
+    display:flex;flex-direction:column;
     box-shadow:0 20px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.06),0 0 160px #3B82F622;
     overflow:hidden;position:relative;z-index:1;
   }
@@ -44,7 +47,7 @@
   .app-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 36px 16px;font-size:34px;font-weight:700;background:#fff}
   .app-bar-left{display:flex;align-items:center;gap:16px}
   .app-bar-right{display:flex;align-items:center;gap:24px;font-size:32px}
-  .content{padding:0 32px 32px;background:#F5F5F7}
+  .content{padding:0 32px 32px;background:#F5F5F7;flex:1}
   .banner{background:linear-gradient(135deg,#00D2C8,#3182F6,#8B5CF6);border-radius:24px;padding:36px 32px;color:#fff;margin-bottom:20px}
   .banner-title{font-size:34px;font-weight:800}
   .banner-row{display:flex;align-items:center;gap:12px;margin-top:12px}
@@ -58,8 +61,8 @@
   .fee-label{font-size:26px;color:#8B95A1}
   .fee-value{font-size:30px;font-weight:700;color:#00D2C8;margin-top:4px}
   .fee-arrow{font-size:28px;color:#8B95A1}
-  .notice-item{display:flex;justify-content:space-between;align-items:center}
-  .notice-title{font-size:28px;font-weight:600}
+  .bottom-nav{display:flex;justify-content:space-around;align-items:center;
+      padding:20px 0 36px;background:#fff;border-top:1px solid #E5E8EB;margin-top:auto;}
   .notice-date{font-size:24px;color:#8B95A1}
   .notice-accent{width:5px;height:40px;background:linear-gradient(180deg,#00D2C8,#3182F6);border-radius:3px;margin-right:16px}
   .schedule-item{display:flex;align-items:center;gap:20px;padding:10px 0}
@@ -188,6 +191,21 @@
       <div class="event-item"><div><div class="event-name">홍길동 결혼식</div><div class="event-type">경사 · 결혼</div></div></div>
       <div style="border-top:1px solid #F2F4F6;margin:8px 0"></div>
       <div class="event-item"><div><div class="event-name">김00 조부상</div><div class="event-type">조사 · 부고</div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">최근 활동</span><span class="card-more">더보기</span></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #F2F4F6">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#00D2C8,#3182F6);flex-shrink:0"></div>
+        <div><div style="font-size:26px;font-weight:600">김민수님이 회비를 납부했어요</div><div style="font-size:22px;color:#8B95A1;margin-top:2px">30분 전</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #F2F4F6">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#a78bfa);flex-shrink:0"></div>
+        <div><div style="font-size:26px;font-weight:600">이영희님이 투표에 참여했어요</div><div style="font-size:22px;color:#8B95A1;margin-top:2px">1시간 전</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:8px 0">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#f472b6,#ec4899);flex-shrink:0"></div>
+        <div><div style="font-size:26px;font-weight:600">박지훈님이 피드에 글을 올렸어요</div><div style="font-size:22px;color:#8B95A1;margin-top:2px">3시간 전</div></div>
+      </div>
     </div>
   </div>
   <div class="bottom-nav">
