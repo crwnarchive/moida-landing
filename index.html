@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>모이다 — 모임 회비 관리의 새로운 기준</title>
-<meta name="description" content="모이다로 모임 회비를 쉽고 투명하게 관리하세요. 그룹 관리, 회비 청구, 정산까지 한 번에.">
-<meta property="og:title" content="모이다 — 모임 회비 관리의 새로운 기준">
-<meta property="og:description" content="모이다로 모임 회비를 쉽고 투명하게 관리하세요. 그룹 관리, 회비 청구, 정산까지 한 번에.">
+<title>모이다 — 모임 운영, 흩어진 걸 하나로</title>
+<meta name="description" content="회비부터 일정까지, 모임의 모든 것. 회비 관리, 피드, 투표, 캘린더, 경조사까지 하나의 앱으로.">
+<meta property="og:title" content="모이다 — 모임 운영, 흩어진 걸 하나로">
+<meta property="og:description" content="회비부터 일정까지, 모임의 모든 것. 회비 관리, 피드, 투표, 캘린더, 경조사까지 하나의 앱으로.">
 <meta property="og:image" content="https://moida-landing.vercel.app/og-image.png">
 <meta property="og:url" content="https://moida-landing.vercel.app">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="모이다 — 모임 회비 관리의 새로운 기준">
-<meta name="twitter:description" content="모이다로 모임 회비를 쉽고 투명하게 관리하세요.">
+<meta name="twitter:title" content="모이다 — 모임 운영, 흩어진 걸 하나로">
+<meta name="twitter:description" content="회비부터 일정까지, 모임의 모든 것.">
 <meta name="twitter:image" content="https://moida-landing.vercel.app/og-image.png">
 <link rel="icon" href="icon.png" type="image/png">
 <link rel="apple-touch-icon" href="icon.png">
@@ -342,6 +342,8 @@ img { max-width: 100%; height: auto; }
   background: linear-gradient(135deg, #FFF7ED 0%, #EFF6FF 100%);
 }
 [data-theme="dark"] .vis-notif { background: linear-gradient(135deg, #27200e 0%, #111d33 100%); }
+[data-theme="dark"] .vis-feed { background: linear-gradient(135deg, #2a1215 0%, #27200e 100%) !important; }
+[data-theme="dark"] .vis-poll { background: linear-gradient(135deg, #1e1535 0%, #111d33 100%) !important; }
 .notif-icon {
   position: relative; font-size: 48px; animation: bellRing 3s ease-in-out infinite;
 }
@@ -523,10 +525,10 @@ img { max-width: 100%; height: auto; }
   </div>
   <div class="container">
     <div class="hero-content fade-up">
-      <h1>총무님,
-아직도 엑셀로 회비 관리하세요?</h1>
-      <p>카톡으로 돈 걷고, 엑셀에 정리하고, 미납자 연락하고...
-이 모든 수고, 모이다가 대신합니다.</p>
+      <h1>모임 운영,
+흩어진 걸 하나로</h1>
+      <p>회비 장부, 피드, 투표, 일정, 경조사까지
+카톡방에 흩어진 모임 관리, 모이다 하나로 깔끔하게.</p>
       <div class="hero-buttons">
         <a href="https://apps.apple.com/kr/app/%EB%AA%A8%EC%9D%B4%EB%8B%A4/id6776201343" class="btn-primary">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -537,7 +539,7 @@ img { max-width: 100%; height: auto; }
       <div class="trust-line">
         <span>✓ 완전 무료</span>
         <span>✓ 3분 만에 시작</span>
-        <span>✓ 공지·경조사·캘린더 관리</span>
+        <span>✓ 피드·투표·회비·캘린더·경조사</span>
       </div>
     </div>
   </div>
@@ -577,7 +579,7 @@ img { max-width: 100%; height: auto; }
     <div class="features-header fade-up">
       <div class="section-label">FEATURES</div>
       <div class="section-title">모임 관리에 필요한 모든 것</div>
-      <div class="section-sub">복잡한 엑셀과 카톡 공지는 이제 그만. 모이다가 깔끔하게 정리해드립니다.</div>
+      <div class="section-sub">회비 장부부터 피드, 투표, 캘린더까지. 모이다 하나로 모임의 모든 것을 관리하세요.</div>
     </div>
     <div class="bento">
       <!-- Card 1: 회비 현황 (wide) -->
@@ -674,7 +676,48 @@ img { max-width: 100%; height: auto; }
         </div>
       </div>
 
-      <!-- Card 6: 알림 -->
+      <!-- Card 6: 피드 & 소통 (wide) -->
+      <div class="bento-card wide fade-up">
+        <div class="bento-visual" style="background: linear-gradient(135deg, #FFF1F2 0%, #FEF3C7 100%); padding: 20px;">
+          <div style="display: flex; gap: 12px; width: 100%; max-width: 380px;">
+            <div style="flex: 1; background: var(--bg-card); border-radius: 14px; padding: 16px; box-shadow: var(--shadow-card);">
+              <div style="width: 100%; height: 60px; background: linear-gradient(135deg, #E0E7FF, #FCE7F3); border-radius: 10px; margin-bottom: 10px;"></div>
+              <div style="font-size: 13px; font-weight: 700;">오늘 모임 후기 📸</div>
+              <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">❤️ 12 · 💬 5</div>
+            </div>
+            <div style="flex: 1; background: var(--bg-card); border-radius: 14px; padding: 16px; box-shadow: var(--shadow-card);">
+              <div style="width: 100%; height: 60px; background: linear-gradient(135deg, #DBEAFE, #E0E7FF); border-radius: 10px; margin-bottom: 10px;"></div>
+              <div style="font-size: 13px; font-weight: 700;">등산 사진 공유!</div>
+              <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">❤️ 8 · 💬 3</div>
+            </div>
+          </div>
+        </div>
+        <div class="bento-text">
+          <h3>피드 & 소통</h3>
+          <p>인스타 감성 게시판에서 사진, 글, 좋아요, 댓글, 대댓글로<br>모임원들과 자유롭게 소통하세요.</p>
+        </div>
+      </div>
+
+      <!-- Card 7: 투표 -->
+      <div class="bento-card fade-up">
+        <div class="bento-visual" style="background: linear-gradient(135deg, #EDE9FE 0%, #E0E7FF 100%); padding: 20px;">
+          <div style="background: var(--bg-card); border-radius: 14px; padding: 16px; box-shadow: var(--shadow-card); width: 100%; max-width: 200px;">
+            <div style="font-size: 13px; font-weight: 700; margin-bottom: 10px;">🗳️ 다음 모임 장소</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="background: linear-gradient(90deg, var(--teal), var(--blue)); height: 8px; border-radius: 4px; width: 85%;"></div>
+              <div style="font-size: 11px; color: var(--text-tertiary);">강남역 카페 · 62%</div>
+              <div style="background: var(--border); height: 8px; border-radius: 4px; width: 45%;"></div>
+              <div style="font-size: 11px; color: var(--text-tertiary);">홍대 맛집 · 38%</div>
+            </div>
+          </div>
+        </div>
+        <div class="bento-text">
+          <h3>투표</h3>
+          <p>복수 선택, 마감 기한 설정으로<br>빠르게 의견을 모으세요.</p>
+        </div>
+      </div>
+
+      <!-- Card 8: 알림 -->
       <div class="bento-card fade-up">
         <div class="bento-visual vis-notif">
           <div class="notif-icon">
@@ -726,7 +769,7 @@ img { max-width: 100%; height: auto; }
     <div class="cta-orb"></div>
     <div class="cta-orb"></div>
     <h2>지금 모이다를 시작하세요</h2>
-    <p>모임 회비 관리, 더 이상 미루지 마세요.</p>
+    <p>회비부터 일정까지, 모임의 모든 것.</p>
     <a href="https://apps.apple.com/kr/app/%EB%AA%A8%EC%9D%B4%EB%8B%A4/id6776201343" class="btn-white">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
       App Store 다운로드
