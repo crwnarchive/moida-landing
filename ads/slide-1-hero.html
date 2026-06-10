@@ -6,111 +6,139 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Pretendard Variable',-apple-system,sans-serif;
-  width:1080px;height:1350px;
-  overflow:hidden;
-  position:relative;
-}
+body{font-family:'Pretendard Variable',-apple-system,sans-serif;width:1080px;height:1350px;background:#F5F0EE;overflow:hidden;position:relative}
+.phone{background:#fff;border-radius:28px;box-shadow:0 8px 40px rgba(0,0,0,0.12);overflow:hidden;position:absolute}
+.di{width:60px;height:16px;background:#000;border-radius:10px;margin:6px auto 2px}
+.sbar{display:flex;justify-content:space-between;padding:6px 16px 2px;font-size:10px;font-weight:600}
+/* Floating cards that pop out of phone */
+.float-card{position:absolute;background:#fff;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);padding:16px 18px;z-index:10}
+.float-notif{position:absolute;background:#fff;border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,0.1);padding:12px 16px;z-index:10;display:flex;align-items:center;gap:10px}
 </style>
 </head>
 <body>
 
-<div style="width:1080px;height:1350px;background:linear-gradient(180deg,#FF6B6B 0%,#ee5a5a 100%);display:flex;flex-direction:column;align-items:center;padding:80px 60px 0;position:relative;overflow:hidden">
-  
-  <!-- Headline -->
-  <div style="text-align:center;margin-bottom:50px;z-index:2">
-    <div style="font-size:52px;font-weight:800;color:#fff;line-height:1.4;letter-spacing:-1px">
-      회비 관리의 <span style="background:#fff;color:#FF6B6B;padding:2px 12px;border-radius:8px">새로운 표준</span>
+<!-- Category label -->
+<div style="position:absolute;top:48px;left:56px;font-size:18px;font-weight:700;color:#00D2C8">모임 관리 플랫폼</div>
+
+<!-- Headline -->
+<div style="position:absolute;top:82px;left:56px;width:460px">
+  <div style="font-size:38px;font-weight:800;color:#191F28;line-height:1.45;letter-spacing:-1px">
+    회비 관리부터 일정·소통까지,<br>
+    <span style="color:#00D2C8">모이다</span> 하나로 끝내세요.
+  </div>
+</div>
+
+<!-- Store badges -->
+<div style="position:absolute;top:230px;left:56px;display:flex;gap:10px">
+  <div style="background:#000;border-radius:8px;padding:6px 14px;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px"><span>🍎</span> App Store</div>
+  <div style="background:#000;border-radius:8px;padding:6px 14px;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px"><span>▶</span> Google Play</div>
+</div>
+
+<!-- Phone 1: 모임홈 (left, behind) -->
+<div class="phone" style="width:340px;top:290px;left:40px;transform:rotate(-3deg)">
+  <div class="di"></div>
+  <div class="sbar"><span>9:41</span><span>📶 🔋</span></div>
+  <div style="padding:2px 14px 6px;font-size:14px;font-weight:700;display:flex;justify-content:space-between"><div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px">←</span>한국고 32기 동창회</div><span style="font-size:13px">🔔 ⚙️</span></div>
+  <div style="padding:0 12px 12px;background:#F5F5F7">
+    <div style="background:linear-gradient(135deg,#00D2C8,#3182F6,#8B5CF6);border-radius:12px;padding:14px 12px;color:#fff;margin-bottom:8px">
+      <div style="font-size:14px;font-weight:800">한국고 32기 동창회</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-top:4px"><span style="background:rgba(255,255,255,0.25);border-radius:8px;padding:2px 8px;font-size:9px;font-weight:700">총무</span><span style="font-size:10px;opacity:0.9">회원 24명 ›</span></div>
     </div>
-    <div style="font-size:44px;font-weight:700;color:rgba(255,255,255,0.95);margin-top:16px;line-height:1.4">
-      <span style="background:#fff;color:#FF6B6B;padding:2px 12px;border-radius:8px">모이다</span>에서 깔끔하고 투명하게
+    <div style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:6px">
+      <div style="font-size:10px;color:#8B95A1">2026년 6월 회비</div>
+      <div style="font-size:14px;font-weight:700;color:#00D2C8;margin-top:2px">18명 납부 <span style="font-size:10px;color:#d97706">· 4명 확인중</span></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:6px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="display:flex;align-items:center;gap:4px"><div style="width:3px;height:16px;background:linear-gradient(180deg,#00D2C8,#3182F6);border-radius:2px"></div><span style="font-size:12px;font-weight:700">최근 공지</span></div><span style="font-size:10px;color:#3182F6;font-weight:600">더보기</span></div>
+      <div style="font-size:11px;font-weight:600">6월 정기모임 장소 변경 안내</div>
+      <div style="font-size:9px;color:#8B95A1;margin-top:2px">28분 전</div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:6px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;font-weight:700">다가오는 일정</span><span style="font-size:10px;color:#3182F6;font-weight:600">더보기</span></div>
+      <div style="display:flex;align-items:center;gap:8px;padding:3px 0"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#3182F6">13</div><div><div style="font-size:11px;font-weight:600">정기모임</div><div style="font-size:8px;color:#8B95A1">6/13 · 10:00</div></div></div>
+      <div style="display:flex;align-items:center;gap:8px;padding:3px 0"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#fef3c7,#fde68a);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#d97706">16</div><div><div style="font-size:11px;font-weight:600">[경사] 홍길동 결혼식</div><div style="font-size:8px;color:#8B95A1">6/16 · 종일</div></div></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:10px 12px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;font-weight:700">경조사</span><span style="font-size:10px;color:#3182F6;font-weight:600">더보기</span></div>
+      <div style="padding:3px 0"><div style="font-size:11px;font-weight:600">홍길동 결혼식</div><div style="font-size:8px;color:#8B95A1">경사 · 결혼</div></div>
     </div>
   </div>
-  
-  <!-- Store badges -->
-  <div style="display:flex;gap:16px;margin-bottom:50px;z-index:2">
-    <div style="background:#fff;border-radius:12px;padding:10px 24px;display:flex;align-items:center;gap:8px;font-size:18px;font-weight:600;color:#333">
-      <span style="font-size:22px">▶</span> Google Play
+  <div style="display:flex;justify-content:space-around;padding:6px 0 14px;border-top:1px solid #eee;font-size:8px;color:#8B95A1">
+    <div style="text-align:center"><div style="font-size:12px">🏠</div><div style="font-weight:700;background:linear-gradient(135deg,#00D2C8,#3182F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">홈</div></div>
+    <div style="text-align:center"><div style="font-size:12px">📢</div>소식</div>
+    <div style="text-align:center"><div style="font-size:12px">📰</div>피드</div>
+    <div style="text-align:center"><div style="font-size:12px">📅</div>캘린더</div>
+    <div style="text-align:center"><div style="font-size:12px">💰</div>회비</div>
+  </div>
+</div>
+
+<!-- Phone 2: 회비현황 (right, front) -->
+<div class="phone" style="width:380px;top:340px;left:420px;transform:rotate(2deg);z-index:5">
+  <div class="di"></div>
+  <div class="sbar"><span>9:41</span><span>📶 🔋</span></div>
+  <div style="padding:2px 14px 6px;font-size:14px;font-weight:700"><span style="font-size:12px">←</span> 2026년 6월 회비</div>
+  <div style="padding:0 12px 12px;background:#F5F5F7">
+    <div style="display:flex;gap:6px;margin-bottom:8px">
+      <div style="flex:1;background:#ecfdf5;border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:#059669">납부</div><div style="font-size:20px;font-weight:800;color:#059669">18</div></div>
+      <div style="flex:1;background:#fef3c7;border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:#d97706">확인중</div><div style="font-size:20px;font-weight:800;color:#d97706">4</div></div>
+      <div style="flex:1;background:#fee2e2;border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:#dc2626">미납</div><div style="font-size:20px;font-weight:800;color:#dc2626">2</div></div>
     </div>
-    <div style="background:#fff;border-radius:12px;padding:10px 24px;display:flex;align-items:center;gap:8px;font-size:18px;font-weight:600;color:#333">
-      <span style="font-size:22px">🍎</span> App Store
+    <div style="background:#fff;border-radius:12px;padding:12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:11px;color:#8B95A1;font-weight:600">납부 18 / 전체 24명</span><span style="font-size:16px;font-weight:800">75%</span></div>
+      <div style="height:10px;background:#F2F4F6;border-radius:5px;overflow:hidden"><div style="width:75%;height:100%;background:linear-gradient(90deg,#00D2C8,#3182F6);border-radius:5px"></div></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:12px;margin-bottom:8px">
+      <div style="font-size:11px;color:#8B95A1;font-weight:600">걷은 금액</div>
+      <div style="font-size:18px;font-weight:800;color:#00D2C8;margin-top:4px">540,000원 <span style="color:#8B95A1;font-weight:600;font-size:12px">/ 720,000원</span></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <div style="flex:1;height:36px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">📋 장부</div>
+      <div style="flex:1;height:36px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">▶ 고지서</div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:12px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px">회원별 현황</div>
+      <div style="display:flex;align-items:center;padding:5px 0;border-bottom:1px solid #F2F4F6"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#4f46e5;margin-right:8px">김</div><span style="flex:1;font-size:12px;font-weight:600">김민수</span><span style="font-size:9px;font-weight:700;background:#ecfdf5;color:#059669;padding:2px 8px;border-radius:6px">납부</span></div>
+      <div style="display:flex;align-items:center;padding:5px 0;border-bottom:1px solid #F2F4F6"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#4f46e5;margin-right:8px">이</div><span style="flex:1;font-size:12px;font-weight:600">이영희</span><span style="font-size:9px;font-weight:700;background:#ecfdf5;color:#059669;padding:2px 8px;border-radius:6px">납부</span></div>
+      <div style="display:flex;align-items:center;padding:5px 0;border-bottom:1px solid #F2F4F6"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#4f46e5;margin-right:8px">박</div><span style="flex:1;font-size:12px;font-weight:600">박지훈</span><span style="font-size:9px;font-weight:700;background:#fef3c7;color:#d97706;padding:2px 8px;border-radius:6px">확인중</span></div>
+      <div style="display:flex;align-items:center;padding:5px 0"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#4f46e5;margin-right:8px">정</div><span style="flex:1;font-size:12px;font-weight:600">정태준</span><span style="font-size:9px;font-weight:700;background:#fee2e2;color:#dc2626;padding:2px 8px;border-radius:6px">미납</span></div>
     </div>
   </div>
-  
-  <!-- Two phone mockups -->
-  <div style="display:flex;gap:24px;z-index:2;position:relative">
-    <!-- Phone 1: 모임홈 -->
-    <div style="width:400px;background:#fff;border-radius:36px;box-shadow:0 20px 60px rgba(0,0,0,0.15);overflow:hidden;transform:rotate(-3deg);margin-top:20px">
-      <div style="width:80px;height:22px;background:#000;border-radius:12px;margin:10px auto 4px"></div>
-      <div style="padding:8px 20px 4px;font-size:12px;font-weight:600;display:flex;justify-content:space-between"><span>9:41</span><span>📶 🔋</span></div>
-      <div style="padding:4px 18px 8px;font-size:17px;font-weight:700;display:flex;justify-content:space-between"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px">←</span>한국고 32기 동창회</div><span style="font-size:15px">🔔 ⚙️</span></div>
-      <div style="padding:0 16px 16px;background:#F5F5F7">
-        <div style="background:linear-gradient(135deg,#00D2C8,#3182F6,#8B5CF6);border-radius:14px;padding:18px 16px;color:#fff;margin-bottom:10px">
-          <div style="font-size:16px;font-weight:800">한국고 32기 동창회</div>
-          <div style="display:flex;align-items:center;gap:6px;margin-top:6px"><span style="background:rgba(255,255,255,0.25);border-radius:10px;padding:2px 10px;font-size:11px;font-weight:700">총무</span><span style="font-size:12px;opacity:0.9">회원 24명 ›</span></div>
-        </div>
-        <div style="background:#fff;border-radius:14px;padding:14px 14px;margin-bottom:10px">
-          <div style="font-size:12px;color:#8B95A1">2026년 6월 회비</div>
-          <div style="font-size:16px;font-weight:700;color:#00D2C8;margin-top:4px">18명 납부</div>
-        </div>
-        <div style="background:#fff;border-radius:14px;padding:14px 14px;margin-bottom:10px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="display:flex;align-items:center;gap:6px"><div style="width:3px;height:20px;background:linear-gradient(180deg,#00D2C8,#3182F6);border-radius:2px"></div><span style="font-size:14px;font-weight:700">최근 공지</span></div><span style="font-size:12px;color:#3182F6;font-weight:600">더보기</span></div>
-          <div style="font-size:13px;font-weight:600">6월 정기모임 장소 변경 안내</div>
-        </div>
-        <div style="background:#fff;border-radius:14px;padding:14px 14px">
-          <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:14px;font-weight:700">다가오는 일정</span><span style="font-size:12px;color:#3182F6;font-weight:600">더보기</span></div>
-          <div style="display:flex;align-items:center;gap:8px;padding:4px 0"><div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#3182F6">13</div><div><div style="font-size:12px;font-weight:600">정기모임</div><div style="font-size:10px;color:#8B95A1">6/13 · 10:00</div></div></div>
-        </div>
-      </div>
-      <div style="display:flex;justify-content:space-around;padding:8px 0 16px;border-top:1px solid #eee;font-size:10px;color:#8B95A1">
-        <div style="text-align:center"><div style="font-size:14px">🏠</div><div style="font-weight:700;background:linear-gradient(135deg,#00D2C8,#3182F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">홈</div></div>
-        <div style="text-align:center"><div style="font-size:14px">📢</div>소식</div>
-        <div style="text-align:center"><div style="font-size:14px">📰</div>피드</div>
-        <div style="text-align:center"><div style="font-size:14px">📅</div>캘린더</div>
-        <div style="text-align:center"><div style="font-size:14px">💰</div>회비</div>
-      </div>
-    </div>
-    
-    <!-- Phone 2: 회비현황 -->
-    <div style="width:400px;background:#fff;border-radius:36px;box-shadow:0 20px 60px rgba(0,0,0,0.15);overflow:hidden;transform:rotate(3deg);margin-top:0">
-      <div style="width:80px;height:22px;background:#000;border-radius:12px;margin:10px auto 4px"></div>
-      <div style="padding:8px 20px 4px;font-size:12px;font-weight:600;display:flex;justify-content:space-between"><span>9:41</span><span>📶 🔋</span></div>
-      <div style="padding:4px 18px 8px;font-size:17px;font-weight:700"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px">←</span>2026년 6월 회비</div></div>
-      <div style="padding:0 16px 16px;background:#F5F5F7">
-        <div style="display:flex;gap:8px;margin-bottom:10px">
-          <div style="flex:1;background:#ecfdf5;border-radius:12px;padding:12px;text-align:center"><div style="font-size:10px;color:#059669">납부</div><div style="font-size:22px;font-weight:800;color:#059669">18</div></div>
-          <div style="flex:1;background:#fef3c7;border-radius:12px;padding:12px;text-align:center"><div style="font-size:10px;color:#d97706">확인중</div><div style="font-size:22px;font-weight:800;color:#d97706">4</div></div>
-          <div style="flex:1;background:#fee2e2;border-radius:12px;padding:12px;text-align:center"><div style="font-size:10px;color:#dc2626">미납</div><div style="font-size:22px;font-weight:800;color:#dc2626">2</div></div>
-        </div>
-        <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px">
-          <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:12px;color:#8B95A1;font-weight:600">납부 18 / 전체 24명</span><span style="font-size:16px;font-weight:800">75%</span></div>
-          <div style="height:10px;background:#F2F4F6;border-radius:5px;overflow:hidden"><div style="width:75%;height:100%;background:linear-gradient(90deg,#00D2C8,#3182F6);border-radius:5px"></div></div>
-        </div>
-        <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px">
-          <div style="font-size:12px;color:#8B95A1;font-weight:600">걷은 금액</div>
-          <div style="font-size:18px;font-weight:800;color:#00D2C8;margin-top:4px">540,000원 <span style="color:#8B95A1;font-weight:600">/ 720,000원</span></div>
-        </div>
-        <div style="background:#fff;border-radius:14px;padding:14px">
-          <div style="font-size:14px;font-weight:700;margin-bottom:10px">회원별 현황</div>
-          <div style="display:flex;align-items:center;padding:6px 0;border-bottom:1px solid #F2F4F6"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#4f46e5;margin-right:8px">김</div><span style="flex:1;font-size:13px;font-weight:600">김민수</span><span style="font-size:10px;font-weight:700;background:#ecfdf5;color:#059669;padding:2px 8px;border-radius:6px">납부</span></div>
-          <div style="display:flex;align-items:center;padding:6px 0;border-bottom:1px solid #F2F4F6"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#4f46e5;margin-right:8px">박</div><span style="flex:1;font-size:13px;font-weight:600">박지훈</span><span style="font-size:10px;font-weight:700;background:#fef3c7;color:#d97706;padding:2px 8px;border-radius:6px">확인중</span></div>
-          <div style="display:flex;align-items:center;padding:6px 0"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#4f46e5;margin-right:8px">정</div><span style="flex:1;font-size:13px;font-weight:600">정태준</span><span style="font-size:10px;font-weight:700;background:#fee2e2;color:#dc2626;padding:2px 8px;border-radius:6px">미납</span></div>
-        </div>
-      </div>
-      <div style="display:flex;justify-content:space-around;padding:8px 0 16px;border-top:1px solid #eee;font-size:10px;color:#8B95A1">
-        <div style="text-align:center"><div style="font-size:14px">🏠</div>홈</div>
-        <div style="text-align:center"><div style="font-size:14px">📢</div>소식</div>
-        <div style="text-align:center"><div style="font-size:14px">📰</div>피드</div>
-        <div style="text-align:center"><div style="font-size:14px">📅</div>캘린더</div>
-        <div style="text-align:center"><div style="font-size:14px">💰</div><div style="font-weight:700;background:linear-gradient(135deg,#00D2C8,#3182F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">회비</div></div>
-      </div>
-    </div>
+  <div style="display:flex;justify-content:space-around;padding:6px 0 14px;border-top:1px solid #eee;font-size:8px;color:#8B95A1">
+    <div style="text-align:center"><div style="font-size:12px">🏠</div>홈</div>
+    <div style="text-align:center"><div style="font-size:12px">📢</div>소식</div>
+    <div style="text-align:center"><div style="font-size:12px">📰</div>피드</div>
+    <div style="text-align:center"><div style="font-size:12px">📅</div>캘린더</div>
+    <div style="text-align:center"><div style="font-size:12px">💰</div><div style="font-weight:700;background:linear-gradient(135deg,#00D2C8,#3182F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">회비</div></div>
   </div>
-  
-  <!-- Brand -->
-  <div style="position:absolute;bottom:60px;left:50%;transform:translateX(-50%);z-index:2">
-    <div style="font-size:36px;font-weight:900;color:#fff;letter-spacing:2px">모이다</div>
+</div>
+
+<!-- Floating notification: 회비 납부 알림 -->
+<div class="float-notif" style="top:300px;left:480px;z-index:20;transform:rotate(1deg)">
+  <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#00D2C8,#3182F6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;flex-shrink:0">💰</div>
+  <div>
+    <div style="font-size:12px;font-weight:700;color:#191F28">김민수님이 회비를 납부했어요</div>
+    <div style="font-size:9px;color:#8B95A1;margin-top:2px">30,000원 · 방금 전</div>
+  </div>
+</div>
+
+<!-- Floating card: 고지서 미리보기 -->
+<div class="float-card" style="top:180px;right:40px;width:240px;z-index:15;transform:rotate(2deg)">
+  <div style="font-size:13px;font-weight:700;color:#191F28;margin-bottom:10px">📋 6월 고지서</div>
+  <div style="display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:1px solid #F2F4F6"><span style="color:#8B95A1">회비</span><span style="font-weight:700">30,000원</span></div>
+  <div style="display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:1px solid #F2F4F6"><span style="color:#8B95A1">납부 기한</span><span style="font-weight:700">6월 20일</span></div>
+  <div style="display:flex;justify-content:space-between;font-size:11px;padding:4px 0"><span style="color:#8B95A1">계좌</span><span style="font-weight:700">카카오뱅크 ****1234</span></div>
+  <div style="margin-top:10px;background:linear-gradient(135deg,#00D2C8,#3182F6);border-radius:8px;padding:8px;text-align:center;color:#fff;font-size:11px;font-weight:700">고지서 보내기 →</div>
+</div>
+
+<!-- Right side text -->
+<div style="position:absolute;bottom:70px;right:56px;width:340px;text-align:right">
+  <div style="font-size:18px;color:#6B7684;line-height:1.6">
+    총 축의금에서 각종 비용 항목을 빼<br>
+    남은 예산을 확인할 수 있어요.
+  </div>
+  <div style="font-size:18px;color:#333D4B;line-height:1.6;margin-top:16px">
+    복잡한 지출 내역을 한눈에 정리하고,<br>
+    <span style="color:#00D2C8;font-weight:700">모임 운영의 시작을 효율적으로 관리</span>해 보세요.
   </div>
 </div>
 

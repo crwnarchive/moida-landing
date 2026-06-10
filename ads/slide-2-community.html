@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard Variable',-apple-system,sans-serif;width:1080px;height:1350px;background:#F5F0EE;overflow:hidden;position:relative}
+.phone{background:#fff;border-radius:28px;box-shadow:0 8px 40px rgba(0,0,0,0.12);overflow:hidden;position:absolute}
+.di{width:60px;height:16px;background:#000;border-radius:10px;margin:6px auto 2px}
+.sbar{display:flex;justify-content:space-between;padding:6px 16px 2px;font-size:10px;font-weight:600}
+/* Floating cards that pop out of phone */
+.float-card{position:absolute;background:#fff;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);padding:16px 18px;z-index:10}
+.float-notif{position:absolute;background:#fff;border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,0.1);padding:12px 16px;z-index:10;display:flex;align-items:center;gap:10px}
+</style>
+</head>
+<body>
+
+<!-- Category -->
+<div style="position:absolute;top:48px;left:56px;font-size:18px;font-weight:700;color:#8B5CF6">피드 · 투표</div>
+
+<!-- Headline -->
+<div style="position:absolute;top:82px;left:56px;width:420px">
+  <div style="font-size:36px;font-weight:800;color:#191F28;line-height:1.45;letter-spacing:-1px">
+    모임 안에서 자유롭게 소통하고,<br>
+    <span style="color:#8B5CF6">투표로 빠르게</span> 결정하세요.
+  </div>
+</div>
+
+<!-- Phone 1: Feed (right, back) -->
+<div class="phone" style="width:360px;top:200px;right:30px;transform:rotate(2deg)">
+  <div class="di"></div>
+  <div class="sbar"><span>9:41</span><span>📶 🔋</span></div>
+  <div style="padding:2px 14px 6px;font-size:14px;font-weight:700;display:flex;justify-content:space-between"><span>피드</span><span style="font-size:13px">✏️</span></div>
+  <div style="padding:0 12px 12px;background:#F5F5F7">
+    <div style="background:#fff;border-radius:12px;margin-bottom:8px;overflow:hidden">
+      <div style="display:flex;align-items:center;padding:10px 12px 6px;gap:8px"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#00D2C8,#3182F6)"></div><div><div style="font-size:11px;font-weight:700">김민수</div><div style="font-size:8px;color:#8B95A1">2시간 전</div></div></div>
+      <div style="padding:0 12px 6px;font-size:11px;color:#333;line-height:1.5">지난주 정기모임 사진들 공유합니다! 🎉<br>다음에도 다같이 모여요~</div>
+      <div style="margin:0 12px 8px;height:100px;background:linear-gradient(135deg,#a7f3d0,#6ee7b7,#34d399);border-radius:8px"></div>
+      <div style="padding:2px 12px 8px;font-size:9px;color:#8B95A1;display:flex;gap:10px"><span>❤️ 12</span><span>💬 5</span></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;margin-bottom:8px;overflow:hidden">
+      <div style="display:flex;align-items:center;padding:10px 12px 6px;gap:8px"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#a78bfa)"></div><div><div style="font-size:11px;font-weight:700">이영희</div><div style="font-size:8px;color:#8B95A1">5시간 전</div></div></div>
+      <div style="padding:0 12px 6px;font-size:11px;color:#333;line-height:1.5">다음 달 회식 장소 추천 받아요! 😊</div>
+      <div style="padding:2px 12px 8px;font-size:9px;color:#8B95A1;display:flex;gap:10px"><span>❤️ 8</span><span>💬 14</span></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;overflow:hidden">
+      <div style="display:flex;align-items:center;padding:10px 12px 6px;gap:8px"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f472b6,#ec4899)"></div><div><div style="font-size:11px;font-weight:700">박지훈</div><div style="font-size:8px;color:#8B95A1">어제</div></div></div>
+      <div style="padding:0 12px 6px;font-size:11px;color:#333;line-height:1.5">동창회 30주년 기념 영상 만들어볼까요? 🎬</div>
+      <div style="margin:0 12px 8px;height:70px;background:linear-gradient(135deg,#fde68a,#fbbf24);border-radius:8px"></div>
+      <div style="padding:2px 12px 8px;font-size:9px;color:#8B95A1;display:flex;gap:10px"><span>❤️ 23</span><span>💬 9</span></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-around;padding:6px 0 14px;border-top:1px solid #eee;font-size:8px;color:#8B95A1">
+    <div style="text-align:center"><div style="font-size:12px">🏠</div>홈</div><div style="text-align:center"><div style="font-size:12px">📢</div>소식</div><div style="text-align:center"><div style="font-size:12px">📰</div><div style="font-weight:700;background:linear-gradient(135deg,#00D2C8,#3182F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">피드</div></div><div style="text-align:center"><div style="font-size:12px">📅</div>캘린더</div><div style="text-align:center"><div style="font-size:12px">💰</div>회비</div>
+  </div>
+</div>
+
+<!-- Phone 2: Poll (left, front, overlapping) -->
+<div class="phone" style="width:380px;top:480px;left:30px;transform:rotate(-2deg);z-index:5">
+  <div class="di"></div>
+  <div class="sbar"><span>9:41</span><span>📶 🔋</span></div>
+  <div style="padding:2px 14px 6px;font-size:14px;font-weight:700"><span style="font-size:12px">←</span> 투표</div>
+  <div style="padding:0 12px 12px;background:#F5F5F7">
+    <div style="background:#fff;border-radius:12px;padding:12px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#00D2C8,#3182F6)"></div><div><div style="font-size:10px;font-weight:700">총무 김민수</div><div style="font-size:8px;color:#8B95A1">3시간 전 · 진행 중</div></div></div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px">🗳️ 7월 정기모임 날짜</div>
+      <div style="background:#F5F5F7;border-radius:8px;padding:8px 10px;margin-bottom:4px;position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:55%;background:linear-gradient(90deg,rgba(0,210,200,0.15),rgba(49,130,246,0.15));border-radius:8px"></div><div style="position:relative;display:flex;justify-content:space-between;font-size:11px;font-weight:600"><span>7월 12일 (토)</span><span style="color:#3182F6">55%</span></div></div>
+      <div style="background:#F5F5F7;border-radius:8px;padding:8px 10px;margin-bottom:4px;position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:30%;background:rgba(139,92,246,0.1);border-radius:8px"></div><div style="position:relative;display:flex;justify-content:space-between;font-size:11px;font-weight:600"><span>7월 13일 (일)</span><span>30%</span></div></div>
+      <div style="background:#F5F5F7;border-radius:8px;padding:8px 10px;position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:15%;background:rgba(139,92,246,0.06);border-radius:8px"></div><div style="position:relative;display:flex;justify-content:space-between;font-size:11px;font-weight:600"><span>7월 19일 (토)</span><span>15%</span></div></div>
+      <div style="font-size:9px;color:#8B95A1;margin-top:6px">20명 참여 · 3일 남음</div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:12px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#a78bfa)"></div><div><div style="font-size:10px;font-weight:700">이영희</div><div style="font-size:8px;color:#8B95A1">어제 · 진행 중</div></div></div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px">🍽️ 회식 장소 투표</div>
+      <div style="background:#F5F5F7;border-radius:8px;padding:8px 10px;margin-bottom:4px;position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:42%;background:linear-gradient(90deg,rgba(0,210,200,0.15),rgba(49,130,246,0.15));border-radius:8px"></div><div style="position:relative;display:flex;justify-content:space-between;font-size:11px;font-weight:600"><span>강남 고깃집</span><span style="color:#3182F6">42%</span></div></div>
+      <div style="background:#F5F5F7;border-radius:8px;padding:8px 10px;margin-bottom:4px;position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:38%;background:rgba(139,92,246,0.1);border-radius:8px"></div><div style="position:relative;display:flex;justify-content:space-between;font-size:11px;font-weight:600"><span>이태원 이탈리안</span><span>38%</span></div></div>
+      <div style="font-size:9px;color:#8B95A1;margin-top:6px">16명 참여 · 5일 남음</div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating: 대댓글 팝업 -->
+<div class="float-card" style="top:200px;left:500px;width:260px;z-index:15;transform:rotate(1deg)">
+  <div style="font-size:12px;font-weight:700;margin-bottom:8px">💬 댓글 · 대댓글</div>
+  <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #F2F4F6">
+    <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#00D2C8,#3182F6);flex-shrink:0"></div>
+    <div><div style="font-size:10px;font-weight:700">김민수</div><div style="font-size:10px;color:#333;margin-top:2px">강남 좋죠! 예약해둘까요?</div></div>
+  </div>
+  <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0 6px 20px">
+    <div style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#f472b6,#ec4899);flex-shrink:0"></div>
+    <div><div style="font-size:9px;font-weight:700">박지훈</div><div style="font-size:9px;color:#333;margin-top:1px">@김민수 네! 찾아볼게요 👍</div></div>
+  </div>
+</div>
+
+<!-- Floating: 투표 알림 -->
+<div class="float-notif" style="top:440px;left:340px;z-index:20;transform:rotate(-1deg)">
+  <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;flex-shrink:0">🗳️</div>
+  <div><div style="font-size:11px;font-weight:700;color:#191F28">투표가 등록되었어요</div><div style="font-size:8px;color:#8B95A1;margin-top:1px">7월 정기모임 날짜 · 방금 전</div></div>
+</div>
+
+<!-- Right bottom text -->
+<div style="position:absolute;bottom:50px;right:50px;width:360px;text-align:right">
+  <div style="font-size:18px;color:#6B7684;line-height:1.7">
+    사진, 글, 댓글, <span style="color:#8B5CF6;font-weight:700">대댓글</span>로<br>
+    우리끼리 자유롭게 소통하고,
+  </div>
+  <div style="font-size:18px;color:#333D4B;line-height:1.7;margin-top:12px">
+    일정·장소·메뉴 결정은<br>
+    <span style="color:#8B5CF6;font-weight:700">실시간 투표</span>로 빠르게 해결하세요.
+  </div>
+</div>
+
+</body>
+</html>
