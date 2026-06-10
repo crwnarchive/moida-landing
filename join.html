@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모이다 — 모임 초대</title>
+<meta property="og:title" content="모이다 모임에 초대받았어요!">
+<meta property="og:description" content="모이다 앱을 설치하고 초대코드를 입력하면 바로 참여할 수 있어요.">
+<meta property="og:image" content="https://moida-landing.vercel.app/og-image.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 24px;
+  }
+  .container { max-width: 400px; }
+  .icon { width: 80px; height: 80px; border-radius: 18px; margin-bottom: 20px; }
+  h1 { font-size: 22px; margin-bottom: 6px; }
+  .subtitle { color: #999; font-size: 14px; margin-bottom: 28px; }
+  .code-box {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .code-label { color: #999; font-size: 13px; margin-bottom: 8px; }
+  .code {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #00D2C8, #3182F6, #8B5CF6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .copy-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 20px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: #ccc;
+    font-size: 13px;
+    cursor: pointer;
+    background: none;
+  }
+  .copy-btn:active { background: #222; }
+  .steps { text-align: left; margin-bottom: 28px; }
+  .step { display: flex; align-items: flex-start; margin-bottom: 12px; }
+  .step-num {
+    width: 24px; height: 24px;
+    background: linear-gradient(135deg, #00D2C8, #3182F6);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+    margin-right: 12px; margin-top: 1px;
+  }
+  .step-text { color: #ccc; font-size: 14px; line-height: 1.5; }
+  .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    background: linear-gradient(135deg, #00D2C8, #3182F6, #8B5CF6);
+    color: #fff;
+  }
+  .btn:hover { opacity: 0.85; }
+  .no-code { color: #666; font-size: 13px; margin-top: 16px; }
+</style>
+<script>
+  function getCode() {
+    var params = new URLSearchParams(window.location.search);
+    return params.get('code') || '';
+  }
+  function copyCode() {
+    var code = getCode();
+    if (!code) return;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(code);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    var btn = document.getElementById('copyBtn');
+    btn.textContent = '복사됨 ✓';
+    setTimeout(function() { btn.textContent = '코드 복사하기'; }, 2000);
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var code = getCode();
+    var codeEl = document.getElementById('inviteCode');
+    var codeBox = document.getElementById('codeBox');
+    var noCode = document.getElementById('noCode');
+    if (code) {
+      codeEl.textContent = code;
+    } else {
+      codeBox.style.display = 'none';
+      noCode.style.display = 'block';
+    }
+  });
+</script>
+</head>
+<body>
+<div class="container">
+  <img src="/icon.png" alt="모이다" class="icon">
+  <h1>모임에 초대받았어요!</h1>
+  <p class="subtitle">모이다 앱을 설치하고 아래 코드를 입력하세요</p>
+
+  <div id="codeBox" class="code-box">
+    <div class="code-label">초대코드</div>
+    <div id="inviteCode" class="code"></div>
+    <button id="copyBtn" class="copy-btn" onclick="copyCode()">코드 복사하기</button>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">아래 버튼을 눌러 모이다 앱을 설치해요</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">앱을 열고 카카오 또는 애플 로그인</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">초대코드를 입력하면 모임에 바로 참여!</div>
+    </div>
+  </div>
+
+  <a href="/download" class="btn">모이다 다운로드</a>
+
+  <div id="noCode" class="no-code" style="display:none">
+    초대코드가 없습니다. 모임 총무에게 코드를 요청해주세요.
+  </div>
+</div>
+</body>
+</html>
