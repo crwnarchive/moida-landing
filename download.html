@@ -69,9 +69,16 @@
     window.location.href = ios;
     return;
   }
-  // Android → Play Store
+  // Android → 출시 예정 안내 (폴백 UI 표시)
   if (/Android/i.test(ua)) {
-    window.location.href = android;
+    document.addEventListener('DOMContentLoaded', function() {
+      var spinner = document.querySelector('.spinner');
+      var msg = document.querySelector('.redirect-msg');
+      var fallback = document.querySelector('.fallback');
+      if (spinner) spinner.style.display = 'none';
+      if (msg) msg.style.display = 'none';
+      if (fallback) fallback.style.display = 'block';
+    });
     return;
   }
   // PC/기타 → 폴백 UI 표시
@@ -108,8 +115,8 @@
       App Store에서 다운로드
     </a>
     <br>
-    <a href="https://play.google.com/store/apps/details?id=com.crwnarchive.moida" class="btn btn-android">
-      Google Play에서 다운로드<br><span class="soon">(곧 출시합니다 아마 곧...)</span>
+    <a href="#" class="btn btn-android" onclick="return false;" style="opacity:0.6; cursor:default;">
+      Google Play<br><span class="soon">6월 중 출시 예정</span>
     </a>
   </div>
 </div>
