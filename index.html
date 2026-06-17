@@ -502,6 +502,70 @@ button { border: none; cursor: pointer; font-family: inherit; }
   width: 100%; text-align: center; font-size: 12px; color: var(--text-tertiary); margin-top: 20px;
 }
 
+/* ===== PRE-REGISTER MODAL ===== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center;
+  padding: 20px; opacity: 0; transition: opacity 0.25s;
+}
+.modal-overlay.show { display: flex; opacity: 1; }
+.modal-box {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 36px 32px; max-width: 400px; width: 100%;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+  transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+}
+.modal-overlay.show .modal-box { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 16px; right: 16px; width: 32px; height: 32px;
+  border-radius: 8px; background: var(--bg-secondary); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: var(--text-tertiary); cursor: pointer; transition: background 0.2s;
+}
+.modal-close:hover { background: var(--border); }
+.modal-icon { font-size: 40px; margin-bottom: 16px; }
+.modal-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
+.modal-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+.modal-tabs { display: flex; gap: 4px; margin-bottom: 16px; background: var(--bg-secondary); border-radius: 10px; padding: 3px; }
+.modal-tab {
+  flex: 1; padding: 8px 0; text-align: center; font-size: 13px; font-weight: 700;
+  border-radius: 8px; background: transparent; color: var(--text-tertiary);
+  cursor: pointer; transition: all 0.2s; border: none;
+}
+.modal-tab.active { background: var(--bg-card); color: var(--text); box-shadow: var(--shadow-sm); }
+.modal-input {
+  width: 100%; padding: 14px 16px; border-radius: var(--radius-xs);
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  font-size: 15px; font-weight: 500; color: var(--text);
+  font-family: inherit; outline: none; transition: border-color 0.2s;
+  margin-bottom: 12px;
+}
+.modal-input:focus { border-color: var(--blue); }
+.modal-input::placeholder { color: var(--text-tertiary); }
+.modal-submit {
+  width: 100%; padding: 14px; border-radius: var(--radius-xs);
+  font-size: 15px; font-weight: 700; border: none; cursor: pointer;
+  background: var(--gradient); color: #fff;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.modal-submit:hover { transform: translateY(-1px); opacity: 0.9; }
+.modal-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.modal-note { font-size: 12px; color: var(--text-tertiary); text-align: center; margin-top: 12px; line-height: 1.5; }
+.modal-success { text-align: center; padding: 20px 0; }
+.modal-success .check-icon { font-size: 48px; margin-bottom: 12px; }
+.modal-success h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.modal-success p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.btn-preregister {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: var(--radius-xs); font-size: 15px; font-weight: 700;
+  background: var(--bg-secondary); color: var(--text); border: 1px solid var(--border);
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.btn-preregister:hover { transform: translateY(-1px); border-color: var(--border-hover); background: var(--bg-card); }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .pain-grid { grid-template-columns: 1fr; }
@@ -576,10 +640,10 @@ button { border: none; cursor: pointer; font-family: inherit; }
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
           App Store
         </a>
-        <span class="btn-secondary" style="opacity:0.6; cursor:default; pointer-events:none;">
+        <button class="btn-preregister" onclick="openPreRegister()">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.52-1.28 1-1.5l10 9-10 9c-.48-.22-1-.67-1-1.5zm14.5-7.5l-3.3-2.8 3.3-2.8 3.6 2.1c.7.4.7 1 0 1.4l-3.6 2.1zM4.6 2.2L14.8 11 12.1 8.5 4.6 2.2zm0 19.6l7.5-6.3 2.7-2.3L4.6 21.8z"/></svg>
-          Google Play 6월 출시 예정
-        </span>
+          Android 사전 예약하기
+        </button>
         <a href="#features" class="btn-secondary">기능 둘러보기 ↓</a>
       </div>
       <div class="hero-features">
@@ -929,7 +993,7 @@ button { border: none; cursor: pointer; font-family: inherit; }
           어떤 기기에서 사용할 수 있나요?
           <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div class="faq-a"><p>iOS(아이폰)는 App Store에서 바로 다운로드할 수 있습니다. Android(Google Play)는 6월 중 출시 예정입니다. iPad은 현재 지원하지 않습니다.</p></div>
+        <div class="faq-a"><p>iOS(아이폰)는 App Store에서 바로 다운로드할 수 있습니다. Android(Google Play)는 곧 출시 예정이며, 사전 예약하시면 출시 즉시 알림을 보내드립니다. iPad은 현재 지원하지 않습니다.</p></div>
       </div>
       <div class="faq-item fade-up">
         <button class="faq-q">
@@ -973,7 +1037,7 @@ button { border: none; cursor: pointer; font-family: inherit; }
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         App Store 다운로드
       </a>
-      <span class="btn-secondary" style="opacity:0.6; cursor:default; pointer-events:none;">Google Play 6월 출시 예정</span>
+      <span class="btn-secondary" style="cursor:pointer;" onclick="openPreRegister()">Android 사전 예약하기</span>
       <a href="mailto:crwn.archive@gmail.com" class="btn-secondary">문의하기 →</a>
     </div>
   </div>
@@ -996,6 +1060,37 @@ button { border: none; cursor: pointer; font-family: inherit; }
     </div>
   </div>
 </footer>
+
+<!-- ===== PRE-REGISTER MODAL ===== -->
+<div class="modal-overlay" id="preRegModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePreRegister()">&times;</button>
+    <div id="preRegForm">
+      <div class="modal-icon">🔔</div>
+      <div class="modal-title">Android 사전 예약</div>
+      <div class="modal-desc">Google Play 출시 즉시 알림을 보내드릴게요.<br>이메일 또는 전화번호를 남겨주세요.</div>
+      <div class="modal-tabs">
+        <button class="modal-tab active" onclick="switchTab('email')">이메일</button>
+        <button class="modal-tab" onclick="switchTab('phone')">전화번호</button>
+      </div>
+      <div id="tabEmail">
+        <input class="modal-input" type="email" id="preRegEmail" placeholder="example@email.com" autocomplete="email">
+      </div>
+      <div id="tabPhone" style="display:none;">
+        <input class="modal-input" type="tel" id="preRegPhone" placeholder="010-1234-5678" autocomplete="tel">
+      </div>
+      <button class="modal-submit" id="preRegSubmit" onclick="submitPreRegister()">사전 예약하기</button>
+      <div class="modal-note">출시 알림 외 다른 용도로 사용하지 않습니다.</div>
+    </div>
+    <div id="preRegSuccess" style="display:none;">
+      <div class="modal-success">
+        <div class="check-icon">✅</div>
+        <h3>사전 예약 완료!</h3>
+        <p>Google Play 출시 즉시<br>알림을 보내드릴게요.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ===== THEME TOGGLE ===== */
@@ -1053,6 +1148,93 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     }
   });
 });
+
+/* ===== PRE-REGISTER MODAL ===== */
+var currentTab = 'email';
+
+function openPreRegister() {
+  var modal = document.getElementById('preRegModal');
+  modal.style.display = 'flex';
+  requestAnimationFrame(function() { modal.classList.add('show'); });
+  document.body.style.overflow = 'hidden';
+  // Reset form
+  document.getElementById('preRegForm').style.display = '';
+  document.getElementById('preRegSuccess').style.display = 'none';
+  document.getElementById('preRegEmail').value = '';
+  document.getElementById('preRegPhone').value = '';
+  document.getElementById('preRegSubmit').disabled = false;
+  document.getElementById('preRegSubmit').textContent = '사전 예약하기';
+}
+
+function closePreRegister() {
+  var modal = document.getElementById('preRegModal');
+  modal.classList.remove('show');
+  setTimeout(function() { modal.style.display = 'none'; }, 250);
+  document.body.style.overflow = '';
+}
+
+document.getElementById('preRegModal').addEventListener('click', function(e) {
+  if (e.target === this) closePreRegister();
+});
+
+function switchTab(tab) {
+  currentTab = tab;
+  var tabs = document.querySelectorAll('.modal-tab');
+  tabs.forEach(function(t) { t.classList.remove('active'); });
+  if (tab === 'email') {
+    tabs[0].classList.add('active');
+    document.getElementById('tabEmail').style.display = '';
+    document.getElementById('tabPhone').style.display = 'none';
+  } else {
+    tabs[1].classList.add('active');
+    document.getElementById('tabEmail').style.display = 'none';
+    document.getElementById('tabPhone').style.display = '';
+  }
+}
+
+function submitPreRegister() {
+  var btn = document.getElementById('preRegSubmit');
+  var email = document.getElementById('preRegEmail').value.trim();
+  var phone = document.getElementById('preRegPhone').value.trim();
+
+  var payload = { platform: 'android' };
+  if (currentTab === 'email') {
+    if (!email || !email.includes('@')) { alert('올바른 이메일을 입력해주세요.'); return; }
+    payload.email = email;
+  } else {
+    var cleanPhone = phone.replace(/[^0-9]/g, '');
+    if (cleanPhone.length < 10) { alert('올바른 전화번호를 입력해주세요.'); return; }
+    payload.phone = cleanPhone;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '등록 중...';
+
+  fetch('https://cavwhdccswjfkutvuqtf.supabase.co/rest/v1/pre_registrations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhdndoZGNjc3dqZmt1dHZ1cXRmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1OTg1MTUsImV4cCI6MjA2MjE3NDUxNX0.bfc-N2jKMGPJsbz0b2M-DP3IvFKJSj00YSig2VGzVSs',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(payload)
+  }).then(function(res) {
+    if (res.ok) {
+      document.getElementById('preRegForm').style.display = 'none';
+      document.getElementById('preRegSuccess').style.display = '';
+      // GA event
+      if (typeof gtag === 'function') {
+        gtag('event', 'pre_register', { method: currentTab, platform: 'android' });
+      }
+    } else {
+      throw new Error('서버 오류');
+    }
+  }).catch(function() {
+    alert('등록 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    btn.disabled = false;
+    btn.textContent = '사전 예약하기';
+  });
+}
 </script>
 </body>
 </html>
