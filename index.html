@@ -171,6 +171,18 @@ img{max-width:100%;display:block}
 .inline-cta a{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:var(--radius-xs);font-size:14px;font-weight:700;background:var(--gradient);color:#fff;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(49,130,246,.2)}
 .inline-cta a:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(49,130,246,.3)}
 
+/* ===== REVIEWS ===== */
+.reviews-section{padding:80px 0;background:var(--bg-secondary);transition:background .3s}
+.reviews-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.review-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:28px 24px;transition:transform .3s,box-shadow .3s}
+.review-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.review-stars{color:#FBBF24;font-size:16px;letter-spacing:2px;margin-bottom:12px}
+.review-title{font-size:16px;font-weight:800;margin-bottom:10px;letter-spacing:-.3px}
+.review-body{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:16px}
+.review-body strong{color:var(--text);font-weight:700}
+.review-author{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-tertiary)}
+.review-name{font-weight:700;color:var(--text-secondary)}
+
 /* ===== USE CASES ===== */
 .usecases{padding:80px 0;background:var(--bg-secondary);transition:background .3s}
 .usecases .section-header{text-align:center;margin-bottom:48px}
@@ -245,6 +257,7 @@ img{max-width:100%;display:block}
   .feature-phone .phone-mockup{width:240px}
   .feature-list{align-items:center}
   .usecase-grid{grid-template-columns:1fr 1fr}
+  .reviews-grid{grid-template-columns:1fr}
   .numbers-grid{grid-template-columns:repeat(2,1fr);gap:24px}
   .sticky-cta{display:block}
   body{padding-bottom:72px}
@@ -429,6 +442,42 @@ img{max-width:100%;display:block}
       <div class="feature-phone">
         <div class="phone-mockup"><img src="screenshots/app/feed.jpg" alt="경조사 화면"></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">App Store 리뷰</div>
+      <h2 class="section-title">실제 사용자 후기</h2>
+      <p class="section-sub">App Store 평점 5.0 · 전원 ★★★★★</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-title">이 어플에 대한 솔직한 평가</p>
+        <p class="review-body">"회비 관리 + 일정 관리가 한 번에 되니까 스트레스가 확 줄었어요. 자동으로 정산 금액도 정리해주니까 괜히 민망하게 돈 얘기 오래 안 해도 되고요. 소규모 모임 자주 하는 분들한테 <strong>진짜 추천합니다.</strong>"</p>
+        <div class="review-author">
+          <span class="review-name">여갑동</span>
+          <span class="review-date">App Store 리뷰</span>
+        </div>
+      </div>
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-title">추천합니다!!</p>
+        <p class="review-body">"모임운영 하면서 필요한 기능들이 한곳에 모여 있어서 편리하네요. 특히 <strong>회비 납부 현황을 확인하기 쉬워서 총무 부담이 줄어들 것 같습니다.</strong> 앞으로의 업데이트도 기대됩니다."</p>
+        <div class="review-author">
+          <span class="review-name">ILvmas</span>
+          <span class="review-date">App Store 리뷰</span>
+        </div>
+      </div>
+    </div>
+    <div class="inline-cta fade-up" style="padding-top:32px">
+      <a href="https://apps.apple.com/app/id6776201343">
+        ★ 5.0 · 지금 무료로 다운로드
+      </a>
     </div>
   </div>
 </section>
