@@ -104,6 +104,12 @@ img{max-width:100%;display:block}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--radius-xs);font-size:15px;font-weight:700;background:var(--bg-secondary);color:var(--text);border:1px solid var(--border);transition:transform .2s}
 .btn-secondary:hover{transform:translateY(-1px)}
 
+/* Social proof strip */
+.social-proof{display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap}
+.proof-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text-secondary)}
+.proof-stars{color:#FBBF24;font-size:14px;letter-spacing:1px}
+.proof-divider{width:1px;height:16px;background:var(--border)}
+
 /* Hero phone mockup */
 .hero-phones{flex-shrink:0;position:relative;width:320px;height:560px}
 .phone-mockup{position:absolute;width:260px;border-radius:36px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.05);background:#000;padding:8px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
@@ -160,6 +166,11 @@ img{max-width:100%;display:block}
 .feature-phone .phone-mockup img{width:100%;border-radius:32px}
 [data-theme="dark"] .feature-phone .phone-mockup{box-shadow:0 24px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08)}
 
+/* ===== INLINE CTA between features ===== */
+.inline-cta{text-align:center;padding:16px 0 40px}
+.inline-cta a{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:var(--radius-xs);font-size:14px;font-weight:700;background:var(--gradient);color:#fff;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(49,130,246,.2)}
+.inline-cta a:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(49,130,246,.3)}
+
 /* ===== USE CASES ===== */
 .usecases{padding:80px 0;background:var(--bg-secondary);transition:background .3s}
 .usecases .section-header{text-align:center;margin-bottom:48px}
@@ -185,6 +196,7 @@ img{max-width:100%;display:block}
 .cta-banner p{font-size:clamp(14px,2vw,16px);color:rgba(255,255,255,.85);margin-bottom:28px;position:relative;z-index:1}
 .btn-white{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:var(--radius-xs);font-size:15px;font-weight:700;background:#fff;color:#191F28;box-shadow:0 4px 16px rgba(0,0,0,.1);position:relative;z-index:1;transition:transform .2s}
 .btn-white:hover{transform:translateY(-2px)}
+.cta-sub{font-size:12px;color:rgba(255,255,255,.65);margin-top:12px;position:relative;z-index:1}
 
 /* ===== FAQ ===== */
 .faq{padding:80px 0}
@@ -211,16 +223,17 @@ img{max-width:100%;display:block}
 
 /* ===== STICKY BOTTOM CTA (mobile) ===== */
 .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:99;background:var(--bg-nav);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:12px 20px;display:none;transition:transform .3s}
-.sticky-cta-inner{max-width:480px;margin:0 auto;display:flex;gap:10px}
+.sticky-cta-inner{max-width:480px;margin:0 auto;display:flex;gap:10px;align-items:center}
 .sticky-cta .btn-sticky{flex:1;text-align:center;padding:13px 0;border-radius:var(--radius-xs);font-size:14px;font-weight:700}
 .btn-sticky-primary{background:var(--text);color:var(--bg)}
-.btn-sticky-secondary{background:var(--bg-secondary);color:var(--text);border:1px solid var(--border)}
+.sticky-cta-label{font-size:12px;color:var(--text-tertiary);text-align:center;flex-shrink:0}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
   .hero-content{flex-direction:column;text-align:center}
   .hero-text p{margin-left:auto;margin-right:auto}
   .hero-buttons{justify-content:center}
+  .social-proof{justify-content:center}
   .hero-phones{width:280px;height:480px;margin:0 auto}
   .phone-mockup{width:220px !important}
   .phone-mockup.front{left:10px !important}
@@ -242,6 +255,8 @@ img{max-width:100%;display:block}
   .phone-mockup.back{left:50px !important;top:30px !important}
   .usecase-grid{grid-template-columns:1fr}
   .cta-banner{margin:0 12px 60px;padding:48px 24px}
+  .proof-divider{display:none}
+  .social-proof{gap:10px}
 }
 </style>
 </head>
@@ -252,7 +267,7 @@ img{max-width:100%;display:block}
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img src="icon.png" alt="모이다"> 모이다</a>
     <div class="nav-right">
-      <a href="https://apps.apple.com/app/id6776201343" class="nav-cta">앱 다운로드</a>
+      <a href="https://apps.apple.com/app/id6776201343" class="nav-cta">무료 다운로드</a>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="다크모드 전환">🌙</button>
     </div>
   </div>
@@ -268,15 +283,25 @@ img{max-width:100%;display:block}
   <div class="container">
     <div class="hero-content">
       <div class="hero-text">
-        <div class="hero-badge"><span class="dot"></span> iOS 출시 완료</div>
-        <h1>모임 관리,<br><span class="gradient-text">하나로 끝.</span></h1>
-        <p>카톡으로 회비 걷고, 엑셀로 장부 쓰고, 밴드로 공지 올리고... 이제 모이다 하나면 돼요.</p>
+        <div class="hero-badge"><span class="dot"></span> iOS 무료 출시</div>
+        <h1>카톡·엑셀 그만.<br><span class="gradient-text">3분이면 시작.</span></h1>
+        <p>회비 걷고, 일정 잡고, 공지 올리고, 채팅까지. 모임에 필요한 모든 걸 하나의 앱으로.</p>
         <div class="hero-buttons">
           <a href="https://apps.apple.com/app/id6776201343" class="btn-primary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
+            App Store에서 무료 다운로드
           </a>
-          <a href="#features" class="btn-secondary">기능 둘러보기 ↓</a>
+        </div>
+        <!-- 소셜 프루프 -->
+        <div class="social-proof">
+          <div class="proof-item">
+            <span class="proof-stars">★★★★★</span>
+            <span>5.0</span>
+          </div>
+          <div class="proof-divider"></div>
+          <div class="proof-item">완전 무료 · 수수료 없음</div>
+          <div class="proof-divider"></div>
+          <div class="proof-item">가입 후 3분이면 모임 시작</div>
         </div>
       </div>
       <div class="hero-phones">
@@ -339,6 +364,14 @@ img{max-width:100%;display:block}
       </div>
     </div>
 
+    <!-- 중간 CTA 1 -->
+    <div class="inline-cta fade-up">
+      <a href="https://apps.apple.com/app/id6776201343">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        지금 무료로 시작하기
+      </a>
+    </div>
+
     <!-- Feature 2: 일정 -->
     <div class="feature-row fade-up">
       <div class="feature-text">
@@ -371,6 +404,14 @@ img{max-width:100%;display:block}
       <div class="feature-phone">
         <div class="phone-mockup"><img src="screenshots/app/news.jpg" alt="소식 화면"></div>
       </div>
+    </div>
+
+    <!-- 중간 CTA 2 -->
+    <div class="inline-cta fade-up">
+      <a href="https://apps.apple.com/app/id6776201343">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        회비·일정·공지 한 번에 관리하기
+      </a>
     </div>
 
     <!-- Feature 4: 경조사 -->
@@ -426,12 +467,13 @@ img{max-width:100%;display:block}
 <div class="cta-banner fade-up">
   <div class="cta-orb"></div>
   <div class="cta-orb"></div>
-  <h2>카톡·엑셀·밴드,<br>이제 그만 쓰세요</h2>
-  <p>모이다 하나로 모임 관리 끝. 무료예요.</p>
+  <h2>총무님, 아직도<br>카톡·엑셀로 버티세요?</h2>
+  <p>지금 바꾸세요. 무료예요.</p>
   <a href="https://apps.apple.com/app/id6776201343" class="btn-white">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="#191F28"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-    App Store에서 다운로드
+    App Store에서 무료 다운로드
   </a>
+  <p class="cta-sub">가입 3분 · 수수료 0원 · 인원 제한 없음</p>
 </div>
 
 <!-- FAQ -->
@@ -506,7 +548,8 @@ img{max-width:100%;display:block}
 <!-- STICKY BOTTOM CTA (mobile) -->
 <div class="sticky-cta" id="stickyCta">
   <div class="sticky-cta-inner">
-    <a href="https://apps.apple.com/app/id6776201343" class="btn-sticky btn-sticky-primary">App Store 다운로드</a>
+    <span class="sticky-cta-label">무료</span>
+    <a href="https://apps.apple.com/app/id6776201343" class="btn-sticky btn-sticky-primary">App Store에서 다운로드</a>
   </div>
 </div>
 
