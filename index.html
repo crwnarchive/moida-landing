@@ -640,12 +640,57 @@ if(hero&&sticky){
   sticky.style.transform='translateY(100%)';
 }
 
-// === 클릭 트래킹 ===
+// === Supabase 트래킹 ===
+const SB_URL = 'https://cavwhdccswjfkutvuqtf.supabase.co';
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhdndoZGNjc3dqZmt1dHZ1cXRmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NzA0NDUsImV4cCI6MjA5NjA0NjQ0NX0.3Sc3sAUsac_28RB-nhx7mXXiYX2xjE9OBRLBCVvNGbI';
+
+function getDevice() {
+  const ua = navigator.userAgent;
+  if (/iPhone|iPad/.test(ua)) return 'iOS';
+  if (/Android/.test(ua)) return 'Android';
+  if (/Mac/.test(ua)) return 'Mac';
+  if (/Windows/.test(ua)) return 'Windows';
+  return 'Other';
+}
+
+function getSessionId() {
+  let sid = sessionStorage.getItem('_mid');
+  if (!sid) { sid = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('_mid', sid); }
+  return sid;
+}
+
+function trackEvent(eventType, extra = {}) {
+  const params = new URLSearchParams(location.search);
+  const body = {
+    event_type: eventType,
+    referrer: document.referrer || 'direct',
+    utm_source: params.get('utm_source') || '',
+    utm_medium: params.get('utm_medium') || '',
+    utm_campaign: params.get('utm_campaign') || '',
+    page_path: location.pathname + location.search,
+    user_agent: navigator.userAgent.slice(0, 200),
+    device: getDevice(),
+    session_id: getSessionId(),
+    ...extra
+  };
+  fetch(SB_URL + '/rest/v1/landing_events', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
+    body: JSON.stringify(body)
+  }).catch(() => {});
+}
+
+// 페이지뷰
+trackEvent('pageview');
+
+// App Store 클릭
 document.querySelectorAll('a[href*="apps.apple.com"]').forEach(link => {
   link.addEventListener('click', () => {
-    // Vercel Analytics custom event
-    if(window.va) window.va('event', {name: 'app_store_click', data: {location: link.closest('.sticky-cta') ? 'sticky_bar' : link.closest('.hero') ? 'hero' : link.closest('.cta-banner') ? 'cta_banner' : 'other'}});
-    // UTM 파라미터 추가
+    const loc = link.closest('.sticky-cta') ? 'sticky_bar' : link.closest('.hero') ? 'hero' : link.closest('.cta-banner') ? 'cta_banner' : 'other';
+    trackEvent('app_store_click', { page_path: '/' + loc });
+    // Vercel Analytics
+    if(window.va) window.va('event', {name: 'app_store_click', data: {location: loc}});
+    // UTM
     const url = new URL(link.href);
     if(!url.searchParams.has('pt')) {
       url.searchParams.set('pt','126498732');
@@ -656,16 +701,20 @@ document.querySelectorAll('a[href*="apps.apple.com"]').forEach(link => {
   });
 });
 
-// === 페이지뷰 소스 트래킹 ===
-if(window.va) {
-  const params = new URLSearchParams(location.search);
-  window.va('event', {name: 'page_view', data: {
-    referrer: document.referrer || 'direct',
-    utm_source: params.get('utm_source') || '',
-    utm_medium: params.get('utm_medium') || '',
-    v: params.get('v') || params.get('ref') || ''
-  }});
-}
+// 스크롤 깊이 트래킹
+let scrollTracked = {};
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !scrollTracked[e.target.id]) {
+      scrollTracked[e.target.id] = true;
+      trackEvent('section_view', { page_path: '/#' + e.target.id });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('section[id], .features, .reviews-section, .usecases, .faq, .cta-banner').forEach(el => {
+  if (!el.id) el.id = 'section_' + Math.random().toString(36).slice(2, 6);
+  observer.observe(el);
+});
 </script>
 </body>
 </html>
