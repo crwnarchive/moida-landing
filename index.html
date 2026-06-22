@@ -274,6 +274,10 @@ img{max-width:100%;display:block}
   .social-proof{gap:10px}
 }
 </style>
+<!-- Vercel Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+<!-- Vercel Speed Insights -->
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
 
@@ -634,6 +638,33 @@ if(hero&&sticky){
   },{threshold:0});
   stickyObs.observe(hero);
   sticky.style.transform='translateY(100%)';
+}
+
+// === 클릭 트래킹 ===
+document.querySelectorAll('a[href*="apps.apple.com"]').forEach(link => {
+  link.addEventListener('click', () => {
+    // Vercel Analytics custom event
+    if(window.va) window.va('event', {name: 'app_store_click', data: {location: link.closest('.sticky-cta') ? 'sticky_bar' : link.closest('.hero') ? 'hero' : link.closest('.cta-banner') ? 'cta_banner' : 'other'}});
+    // UTM 파라미터 추가
+    const url = new URL(link.href);
+    if(!url.searchParams.has('pt')) {
+      url.searchParams.set('pt','126498732');
+      url.searchParams.set('ct', document.referrer ? new URL(document.referrer).hostname : 'direct');
+      url.searchParams.set('mt','8');
+      link.href = url.toString();
+    }
+  });
+});
+
+// === 페이지뷰 소스 트래킹 ===
+if(window.va) {
+  const params = new URLSearchParams(location.search);
+  window.va('event', {name: 'page_view', data: {
+    referrer: document.referrer || 'direct',
+    utm_source: params.get('utm_source') || '',
+    utm_medium: params.get('utm_medium') || '',
+    v: params.get('v') || params.get('ref') || ''
+  }});
 }
 </script>
 </body>
