@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>모이다 관리자</title>
+<style>
+:root {
+  --bg: #0a0a0a; --card: #141414; --border: #222; --text: #e5e5e5;
+  --sub: #888; --accent: #3182f6; --green: #34c759; --red: #ff3b30;
+  --orange: #ff9500; --yellow: #ffd60a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+.login-wrap { display:flex; align-items:center; justify-content:center; min-height:100vh; }
+.login-box { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:40px; width:320px; text-align:center; }
+.login-box h2 { margin-bottom:24px; font-size:20px; }
+.login-box input { width:100%; padding:12px 16px; border:1px solid var(--border); border-radius:10px; background:#1a1a1a; color:var(--text); font-size:15px; margin-bottom:16px; outline:none; }
+.login-box input:focus { border-color:var(--accent); }
+.login-box button { width:100%; padding:12px; border:none; border-radius:10px; background:var(--accent); color:#fff; font-size:15px; font-weight:600; cursor:pointer; }
+.login-box button:hover { opacity:.9; }
+.login-error { color:var(--red); font-size:13px; margin-top:8px; display:none; }
+
+.app { display:none; }
+.topbar { display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border-bottom:1px solid var(--border); background:var(--card); position:sticky; top:0; z-index:100; }
+.topbar h1 { font-size:18px; font-weight:700; }
+.topbar .right { display:flex; gap:8px; align-items:center; }
+.topbar button { padding:6px 14px; border:1px solid var(--border); border-radius:8px; background:transparent; color:var(--sub); font-size:13px; cursor:pointer; }
+.topbar button:hover { color:var(--text); border-color:var(--sub); }
+
+.tabs { display:flex; gap:4px; padding:12px 24px; border-bottom:1px solid var(--border); background:var(--card); overflow-x:auto; }
+.tab { padding:8px 18px; border-radius:8px; font-size:14px; font-weight:500; cursor:pointer; color:var(--sub); white-space:nowrap; transition:all .2s; }
+.tab:hover { color:var(--text); background:#1a1a1a; }
+.tab.active { color:var(--accent); background:rgba(49,130,246,.1); }
+
+.content { max-width:1200px; margin:0 auto; padding:24px; }
+.section { display:none; }
+.section.active { display:block; }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-bottom:24px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; }
+.card .label { font-size:12px; color:var(--sub); margin-bottom:4px; }
+.card .value { font-size:24px; font-weight:700; }
+.card .sub { font-size:12px; color:var(--sub); margin-top:4px; }
+.card .change { font-size:12px; font-weight:600; }
+.card .change.up { color:var(--green); }
+.card .change.down { color:var(--red); }
+
+/* Transaction detail styles */
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
+.filters select, .filters input { padding:8px 12px; border:1px solid var(--border); border-radius:8px; background:#1a1a1a; color:var(--text); font-size:13px; outline:none; }
+.filters select:focus, .filters input:focus { border-color:var(--accent); }
+.filters .filter-label { font-size:12px; color:var(--sub); margin-right:4px; }
+
+.tx-table { width:100%; border-collapse:collapse; font-size:13px; }
+.tx-table thead { position:sticky; top:110px; }
+.tx-table th { text-align:left; padding:10px 12px; background:var(--card); border-bottom:2px solid var(--border); color:var(--sub); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
+.tx-table td { padding:10px 12px; border-bottom:1px solid var(--border); }
+.tx-table tr:hover { background:rgba(255,255,255,.03); }
+.tx-badge { display:inline-block; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:600; }
+.tx-badge.income { background:rgba(52,199,89,.15); color:var(--green); }
+.tx-badge.expense { background:rgba(255,59,48,.15); color:var(--red); }
+.amount-income { color:var(--green); font-weight:600; }
+.amount-expense { color:var(--red); font-weight:600; }
+
+.summary-row { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+.summary-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 20px; flex:1; min-width:150px; text-align:center; }
+.summary-item .s-label { font-size:11px; color:var(--sub); margin-bottom:2px; }
+.summary-item .s-value { font-size:20px; font-weight:700; }
+
+.empty-state { text-align:center; padding:60px 20px; color:var(--sub); }
+.empty-state .icon { font-size:48px; margin-bottom:12px; }
+
+.loading { text-align:center; padding:40px; color:var(--sub); }
+.loading .spinner { display:inline-block; width:24px; height:24px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 1s linear infinite; margin-bottom:8px; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+.retention-circle { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; margin:0 auto 4px; }
+.ret-good { background:rgba(52,199,89,.15); color:var(--green); }
+.ret-mid { background:rgba(255,150,0,.15); color:var(--orange); }
+.ret-bad { background:rgba(255,59,48,.15); color:var(--red); }
+
+.bar-chart { display:flex; align-items:flex-end; gap:6px; height:120px; margin-top:8px; }
+.bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+.bar { width:100%; border-radius:4px 4px 0 0; background:var(--accent); min-height:2px; transition:height .5s; }
+.bar-label { font-size:10px; color:var(--sub); }
+.bar-value { font-size:10px; color:var(--text); font-weight:600; }
+
+.pagination { display:flex; gap:8px; justify-content:center; margin-top:16px; align-items:center; }
+.pagination button { padding:6px 14px; border:1px solid var(--border); border-radius:8px; background:transparent; color:var(--sub); font-size:13px; cursor:pointer; }
+.pagination button:hover:not(:disabled) { color:var(--text); border-color:var(--sub); }
+.pagination button:disabled { opacity:.3; cursor:default; }
+.pagination .page-info { font-size:13px; color:var(--sub); }
+
+@media(max-width:768px) {
+  .content { padding:16px; }
+  .grid { grid-template-columns:repeat(2,1fr); gap:8px; }
+  .filters { flex-direction:column; }
+  .tx-table { font-size:12px; }
+  .tx-table th, .tx-table td { padding:8px 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <h2>모이다 관리자</h2>
+    <input type="password" id="pwInput" placeholder="비밀번호" autocomplete="off">
+    <button onclick="doLogin()">로그인</button>
+    <div class="login-error" id="loginErr">비밀번호가 올바르지 않습니다</div>
+  </div>
+</div>
+
+<!-- App -->
+<div class="app" id="app">
+  <div class="topbar">
+    <h1>모이다 관리자</h1>
+    <div class="right">
+      <span id="lastUpdate" style="font-size:12px;color:var(--sub)"></span>
+      <button onclick="refreshAll()">새로고침</button>
+      <button onclick="doLogout()">로그아웃</button>
+    </div>
+  </div>
+  
+  <div class="tabs" id="tabBar">
+    <div class="tab active" data-tab="overview">📊 개요</div>
+    <div class="tab" data-tab="growth">📈 성장</div>
+    <div class="tab" data-tab="engagement">💬 활동</div>
+    <div class="tab" data-tab="transactions">💰 거래내역</div>
+    <div class="tab" data-tab="landing">🌐 랜딩</div>
+  </div>
+
+  <div class="content">
+    <!-- Overview -->
+    <div class="section active" id="sec-overview">
+      <div class="grid" id="overviewGrid"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="card"><div class="label">리텐션</div><div id="retentionCircles" style="display:flex;gap:12px;margin-top:8px"></div></div>
+        <div class="card"><div class="label">7일간 가입 추이</div><div id="signupChart" class="bar-chart"></div></div>
+      </div>
+    </div>
+
+    <!-- Growth -->
+    <div class="section" id="sec-growth">
+      <div class="grid" id="growthGrid"></div>
+      <div class="card" style="margin-top:12px"><div class="label">모임 규모 분포</div><div id="groupDist" style="display:flex;gap:12px;margin-top:8px"></div></div>
+    </div>
+
+    <!-- Engagement -->
+    <div class="section" id="sec-engagement">
+      <div class="grid" id="engagementGrid"></div>
+      <div class="card" style="margin-top:12px"><div class="label">7일간 메시지 추이</div><div id="msgChart" class="bar-chart"></div></div>
+    </div>
+
+    <!-- Transactions -->
+    <div class="section" id="sec-transactions">
+      <div class="summary-row" id="txSummary"></div>
+      <div class="filters" id="txFilters">
+        <div>
+          <span class="filter-label">유형</span>
+          <select id="filterType"><option value="all">전체</option><option value="income">수입</option><option value="expense">지출</option></select>
+        </div>
+        <div>
+          <span class="filter-label">모임</span>
+          <select id="filterGroup"><option value="all">전체 모임</option></select>
+        </div>
+        <div>
+          <span class="filter-label">카테고리</span>
+          <select id="filterCategory"><option value="all">전체</option></select>
+        </div>
+        <div>
+          <span class="filter-label">시작</span>
+          <input type="date" id="filterDateFrom">
+        </div>
+        <div>
+          <span class="filter-label">종료</span>
+          <input type="date" id="filterDateTo">
+        </div>
+        <button onclick="resetFilters()" style="padding:8px 14px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--sub);font-size:13px;cursor:pointer">초기화</button>
+      </div>
+      <div id="txTableWrap"></div>
+      <div class="pagination" id="txPagination"></div>
+    </div>
+
+    <!-- Landing -->
+    <div class="section" id="sec-landing">
+      <div class="grid" id="landingGrid"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://cavwhdccswjfkutvuqtf.supabase.co';
+const PASSWORD_HASH = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'; // sha256('password')
+let SERVICE_KEY = '';
+let dashboardData = null;
+let allTransactions = [];
+let filteredTransactions = [];
+let txPage = 0;
+const TX_PER_PAGE = 30;
+
+// --- Auth ---
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin() {
+  const pw = document.getElementById('pwInput').value;
+  const hash = await sha256(pw);
+  // Accept 'moida2024!' or any password that matches stored hash
+  if (pw === 'moida2024!' || hash === PASSWORD_HASH) {
+    localStorage.setItem('moida_admin', pw);
+    showApp();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+document.getElementById('pwInput').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function doLogout() {
+  localStorage.removeItem('moida_admin');
+  location.reload();
+}
+
+function showApp() {
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  SERVICE_KEY = localStorage.getItem('moida_svc_key') || '';
+  if (!SERVICE_KEY) {
+    promptServiceKey();
+  } else {
+    refreshAll();
+  }
+}
+
+function promptServiceKey() {
+  const key = prompt('Supabase service_role key를 입력하세요 (최초 1회):');
+  if (key && key.startsWith('eyJ')) {
+    SERVICE_KEY = key.trim();
+    localStorage.setItem('moida_svc_key', SERVICE_KEY);
+    refreshAll();
+  } else {
+    alert('유효한 키를 입력해주세요');
+  }
+}
+
+// --- API ---
+async function restRpc(fnName) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fnName}`, {
+    method: 'POST', headers: { 'apikey': SERVICE_KEY, 'Authorization': `Bearer ${SERVICE_KEY}`, 'Content-Type': 'application/json' },
+    body: '{}'
+  });
+  if (!res.ok) throw new Error(`RPC ${fnName}: ${res.status}`);
+  return res.json();
+}
+
+async function restQuery(table, params='') {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${params}`, {
+    headers: { 'apikey': SERVICE_KEY, 'Authorization': `Bearer ${SERVICE_KEY}` }
+  });
+  if (!res.ok) throw new Error(`Query ${table}: ${res.status}`);
+  return res.json();
+}
+
+async function fetchTransactions() {
+  // Get all transactions with group name via PostgREST embedding
+  const data = await restQuery('transactions', 'select=*,groups(name)&order=date.desc&limit=1000');
+  allTransactions = data.map(t => ({
+    ...t,
+    group_name: t.groups?.name || '(삭제된 모임)'
+  }));
+  
+  // Populate filter dropdowns
+  const groups = [...new Set(allTransactions.map(t=>t.group_name))].sort();
+  const cats = [...new Set(allTransactions.filter(t=>t.category).map(t=>t.category))].sort();
+  
+  const gSel = document.getElementById('filterGroup');
+  gSel.innerHTML = '<option value="all">전체 모임</option>' + groups.map(g=>`<option value="${g}">${g}</option>`).join('');
+  
+  const cSel = document.getElementById('filterCategory');
+  cSel.innerHTML = '<option value="all">전체</option>' + cats.map(c=>`<option value="${c}">${c}</option>`).join('');
+  
+  applyTxFilters();
+}
+
+async function fetchLandingEvents() {
+  try {
+    const today = new Date().toISOString().split('T')[0];
+    const weekAgo = new Date(Date.now()-7*86400000).toISOString().split('T')[0];
+    
+    const [total, todayCount, weekCount] = await Promise.all([
+      restQuery('landing_events', 'select=id&limit=1&head=true').catch(()=>[]),
+      restQuery('landing_events', `select=id&event_type=eq.pageview&created_at=gte.${today}T00:00:00`).catch(()=>[]),
+      restQuery('landing_events', `select=id&created_at=gte.${weekAgo}T00:00:00`).catch(()=>[]),
+    ]);
+    
+    // Use count from header or array length
+    const grid = document.getElementById('landingGrid');
+    grid.innerHTML = `
+      <div class="card"><div class="label">오늘 페이지뷰</div><div class="value">${todayCount.length || 0}</div></div>
+      <div class="card"><div class="label">이번주 이벤트</div><div class="value">${weekCount.length || 0}</div></div>
+    `;
+  } catch(e) {
+    document.getElementById('landingGrid').innerHTML = '<div class="card"><div class="label">랜딩 데이터</div><div class="value">-</div><div class="sub">landing_events 테이블 없음</div></div>';
+  }
+}
+
+// --- Filters ---
+function applyTxFilters() {
+  const type = document.getElementById('filterType').value;
+  const group = document.getElementById('filterGroup').value;
+  const cat = document.getElementById('filterCategory').value;
+  const from = document.getElementById('filterDateFrom').value;
+  const to = document.getElementById('filterDateTo').value;
+  
+  filteredTransactions = allTransactions.filter(t => {
+    if (type !== 'all' && t.type !== type) return false;
+    if (group !== 'all' && t.group_name !== group) return false;
+    if (cat !== 'all' && t.category !== cat) return false;
+    if (from && t.date < from) return false;
+    if (to && t.date > to + 'T23:59:59') return false;
+    return true;
+  });
+  
+  txPage = 0;
+  renderTxSummary();
+  renderTxTable();
+}
+
+function resetFilters() {
+  document.getElementById('filterType').value = 'all';
+  document.getElementById('filterGroup').value = 'all';
+  document.getElementById('filterCategory').value = 'all';
+  document.getElementById('filterDateFrom').value = '';
+  document.getElementById('filterDateTo').value = '';
+  applyTxFilters();
+}
+
+// Event listeners for filters
+['filterType','filterGroup','filterCategory','filterDateFrom','filterDateTo'].forEach(id => {
+  document.getElementById(id).addEventListener('change', applyTxFilters);
+});
+
+// --- Renderers ---
+function fmt(n) { return n?.toLocaleString('ko-KR') ?? '-'; }
+function fmtWon(n) { return '₩' + (n?.toLocaleString('ko-KR') ?? '0'); }
+function fmtDate(d) {
+  if (!d) return '-';
+  const dt = new Date(d);
+  return `${dt.getFullYear()}.${String(dt.getMonth()+1).padStart(2,'0')}.${String(dt.getDate()).padStart(2,'0')}`;
+}
+function fmtDateTime(d) {
+  if (!d) return '-';
+  const dt = new Date(d);
+  return `${fmtDate(d)} ${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')}`;
+}
+
+function changeTag(curr, prev) {
+  if (!prev || prev === 0) return '';
+  const pct = Math.round(((curr - prev) / prev) * 100);
+  if (pct > 0) return `<span class="change up">+${pct}%</span>`;
+  if (pct < 0) return `<span class="change down">${pct}%</span>`;
+  return '<span class="change" style="color:var(--sub)">0%</span>';
+}
+
+function renderOverview(d) {
+  document.getElementById('overviewGrid').innerHTML = `
+    <div class="card"><div class="label">총 유저</div><div class="value">${fmt(d.total_users)}</div><div class="sub">오늘 +${fmt(d.signups_today)}</div></div>
+    <div class="card"><div class="label">총 모임</div><div class="value">${fmt(d.total_groups)}</div><div class="sub">활성 ${fmt(d.active_groups_7d)}개</div></div>
+    <div class="card"><div class="label">DAU / WAU / MAU</div><div class="value">${fmt(d.dau)}</div><div class="sub">${fmt(d.wau)} / ${fmt(d.mau)}</div></div>
+    <div class="card"><div class="label">평균 멤버/모임</div><div class="value">${d.avg_members_per_group}</div></div>
+    <div class="card"><div class="label">총 거래액</div><div class="value">${fmtWon(d.transactions_total_amount || 0)}</div><div class="sub">이번주 ${fmtWon(d.transactions_this_week_amount || 0)}</div></div>
+    <div class="card"><div class="label">비활성(7일+)</div><div class="value">${fmt(d.inactive_7d)}</div></div>
+  `;
+
+  // Retention circles
+  const rc = document.getElementById('retentionCircles');
+  const rets = [
+    {label:'D1', val:d.retention_d1},
+    {label:'D7', val:d.retention_d7},
+    {label:'D30', val:d.retention_d30}
+  ];
+  rc.innerHTML = rets.map(r => {
+    const cls = r.val > 30 ? 'ret-good' : r.val > 15 ? 'ret-mid' : 'ret-bad';
+    return `<div style="text-align:center"><div class="retention-circle ${cls}">${r.val ?? 0}%</div><div style="font-size:11px;color:var(--sub)">${r.label}</div></div>`;
+  }).join('');
+
+  // Signup chart
+  const chart = document.getElementById('signupChart');
+  const signups = d.daily_signups_7d || [];
+  const maxVal = Math.max(...signups.map(s=>s.count), 1);
+  chart.innerHTML = signups.map(s => {
+    const h = Math.max((s.count/maxVal)*100, 2);
+    const day = new Date(s.day).toLocaleDateString('ko',{weekday:'short'});
+    return `<div class="bar-col"><div class="bar-value">${s.count}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${day}</div></div>`;
+  }).join('');
+}
+
+function renderGrowth(d) {
+  document.getElementById('growthGrid').innerHTML = `
+    <div class="card"><div class="label">이번주 가입</div><div class="value">${fmt(d.signups_this_week)}</div><div class="sub">지난주 ${fmt(d.signups_prev_week)} ${changeTag(d.signups_this_week,d.signups_prev_week)}</div></div>
+    <div class="card"><div class="label">이번달 가입</div><div class="value">${fmt(d.signups_this_month)}</div><div class="sub">지난달 ${fmt(d.signups_prev_month)} ${changeTag(d.signups_this_month,d.signups_prev_month)}</div></div>
+    <div class="card"><div class="label">이번주 모임</div><div class="value">${fmt(d.groups_this_week)}</div><div class="sub">지난주 ${fmt(d.groups_prev_week)} ${changeTag(d.groups_this_week,d.groups_prev_week)}</div></div>
+    <div class="card"><div class="label">이번달 모임</div><div class="value">${fmt(d.groups_this_month)}</div></div>
+    <div class="card"><div class="label">이탈(7일)</div><div class="value">${fmt(d.left_members_this_week)}</div><div class="sub">이번달 ${fmt(d.left_members_this_month)}</div></div>
+  `;
+  
+  // Group distribution
+  const dist = d.group_size_distribution || {};
+  const total = (dist.solo||0)+(dist.small||0)+(dist.medium||0)+(dist.large||0) || 1;
+  document.getElementById('groupDist').innerHTML = [
+    {label:'1명(솔로)',val:dist.solo||0,color:'var(--red)'},
+    {label:'2-5명',val:dist.small||0,color:'var(--orange)'},
+    {label:'6-15명',val:dist.medium||0,color:'var(--green)'},
+    {label:'16명+',val:dist.large||0,color:'var(--accent)'}
+  ].map(g => `<div style="flex:1;text-align:center"><div style="font-size:20px;font-weight:700;color:${g.color}">${g.val}</div><div style="font-size:11px;color:var(--sub)">${g.label}</div><div style="height:4px;border-radius:2px;background:var(--border);margin-top:4px"><div style="height:100%;width:${(g.val/total*100)}%;background:${g.color};border-radius:2px"></div></div></div>`).join('');
+}
+
+function renderEngagement(d) {
+  document.getElementById('engagementGrid').innerHTML = `
+    <div class="card"><div class="label">오늘 메시지</div><div class="value">${fmt(d.messages_today)}</div></div>
+    <div class="card"><div class="label">이번주 메시지</div><div class="value">${fmt(d.messages_this_week)}</div></div>
+    <div class="card"><div class="label">이번주 게시글</div><div class="value">${fmt(d.posts_this_week)}</div></div>
+    <div class="card"><div class="label">이번주 일정</div><div class="value">${fmt(d.events_this_week)}</div></div>
+    <div class="card"><div class="label">이번주 거래</div><div class="value">${fmt(d.transactions_this_week)}</div></div>
+  `;
+
+  const chart = document.getElementById('msgChart');
+  const msgs = d.daily_messages_7d || [];
+  const maxVal = Math.max(...msgs.map(s=>s.count), 1);
+  chart.innerHTML = msgs.map(s => {
+    const h = Math.max((s.count/maxVal)*100, 2);
+    const day = new Date(s.day).toLocaleDateString('ko',{weekday:'short'});
+    return `<div class="bar-col"><div class="bar-value">${s.count}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${day}</div></div>`;
+  }).join('');
+}
+
+function renderTxSummary() {
+  const income = filteredTransactions.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+  const expense = filteredTransactions.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+  const total = income + expense;
+  const count = filteredTransactions.length;
+  
+  document.getElementById('txSummary').innerHTML = `
+    <div class="summary-item"><div class="s-label">총 거래건수</div><div class="s-value">${fmt(count)}건</div></div>
+    <div class="summary-item"><div class="s-label">총 거래액</div><div class="s-value">${fmtWon(total)}</div></div>
+    <div class="summary-item"><div class="s-label">수입 합계</div><div class="s-value amount-income">${fmtWon(income)}</div></div>
+    <div class="summary-item"><div class="s-label">지출 합계</div><div class="s-value amount-expense">${fmtWon(expense)}</div></div>
+    <div class="summary-item"><div class="s-label">잔액 (수입-지출)</div><div class="s-value" style="color:${income-expense>=0?'var(--green)':'var(--red)'}">${fmtWon(income-expense)}</div></div>
+  `;
+}
+
+function renderTxTable() {
+  const wrap = document.getElementById('txTableWrap');
+  const start = txPage * TX_PER_PAGE;
+  const pageData = filteredTransactions.slice(start, start + TX_PER_PAGE);
+  
+  if (filteredTransactions.length === 0) {
+    wrap.innerHTML = '<div class="empty-state"><div class="icon">📭</div><div>거래 내역이 없습니다</div></div>';
+    document.getElementById('txPagination').innerHTML = '';
+    return;
+  }
+  
+  wrap.innerHTML = `<table class="tx-table">
+    <thead><tr>
+      <th>날짜</th><th>모임</th><th>유형</th><th>카테고리</th><th>설명</th><th>금액</th><th>메모</th>
+    </tr></thead>
+    <tbody>${pageData.map(t => `<tr>
+      <td>${fmtDate(t.date)}</td>
+      <td>${t.group_name}</td>
+      <td><span class="tx-badge ${t.type}">${t.type==='income'?'수입':'지출'}</span></td>
+      <td>${t.category || '-'}</td>
+      <td>${t.description || '-'}</td>
+      <td class="amount-${t.type}">${t.type==='income'?'+':'-'}${fmtWon(t.amount)}</td>
+      <td>${t.memo || '-'}</td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+  
+  const totalPages = Math.ceil(filteredTransactions.length / TX_PER_PAGE);
+  document.getElementById('txPagination').innerHTML = `
+    <button onclick="txPage=0;renderTxTable()" ${txPage===0?'disabled':''}>처음</button>
+    <button onclick="txPage--;renderTxTable()" ${txPage===0?'disabled':''}>이전</button>
+    <span class="page-info">${txPage+1} / ${totalPages} (총 ${filteredTransactions.length}건)</span>
+    <button onclick="txPage++;renderTxTable()" ${txPage>=totalPages-1?'disabled':''}>다음</button>
+    <button onclick="txPage=${totalPages-1};renderTxTable()" ${txPage>=totalPages-1?'disabled':''}>마지막</button>
+  `;
+}
+
+// --- Tab switching ---
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('sec-'+tab.dataset.tab).classList.add('active');
+  });
+});
+
+// --- Refresh ---
+async function refreshAll() {
+  try {
+    // Show loading
+    document.getElementById('overviewGrid').innerHTML = '<div class="loading"><div class="spinner"></div><div>로딩 중...</div></div>';
+    
+    const [dashboard] = await Promise.all([
+      restRpc('get_admin_dashboard'),
+      fetchTransactions(),
+      fetchLandingEvents()
+    ]);
+    
+    dashboardData = dashboard;
+    renderOverview(dashboard);
+    renderGrowth(dashboard);
+    renderEngagement(dashboard);
+    
+    document.getElementById('lastUpdate').textContent = '업데이트: ' + new Date().toLocaleTimeString('ko');
+  } catch(e) {
+    console.error(e);
+    if (e.message.includes('401') || e.message.includes('403')) {
+      alert('API 키가 만료되었거나 유효하지 않습니다. 다시 입력해주세요.');
+      localStorage.removeItem('moida_svc_key');
+      promptServiceKey();
+    } else {
+      document.getElementById('overviewGrid').innerHTML = `<div class="card" style="grid-column:1/-1"><div class="label">오류</div><div class="value" style="font-size:14px;color:var(--red)">${e.message}</div></div>`;
+    }
+  }
+}
+
+// --- Init ---
+if (localStorage.getItem('moida_admin')) {
+  showApp();
+}
+</script>
+</body>
+</html>
