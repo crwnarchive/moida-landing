@@ -202,6 +202,57 @@ img{max-width:100%;display:block}
 .number-item h3{font-size:clamp(28px,5vw,36px);font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
 .number-item p{font-size:14px;color:var(--text-tertiary);font-weight:500}
 
+/* ===== BRAND STORY ===== */
+.brand-story{padding:80px 0;background:var(--bg-secondary);transition:background .3s}
+.story-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:680px;margin:0 auto}
+.story-card{display:flex;align-items:center;gap:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:24px;text-align:left;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.story-card::before{content:'';position:absolute;inset:0;background:var(--gradient);opacity:0;transition:opacity .3s;border-radius:var(--radius-sm)}
+.story-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.story-card:hover::before{opacity:.06}
+.story-card-icon{font-size:32px;flex-shrink:0;position:relative;z-index:1}
+.story-card-content{flex:1;min-width:0;position:relative;z-index:1}
+.story-card-content h4{font-size:17px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px;color:var(--text)}
+.story-card-content p{font-size:13px;color:var(--text-secondary);line-height:1.5;margin:0}
+.story-arrow{width:20px;height:20px;flex-shrink:0;color:var(--text-tertiary);transition:transform .3s,color .3s;position:relative;z-index:1}
+.story-card:hover .story-arrow{transform:translateX(4px);color:var(--blue)}
+
+/* Story Modal */
+.story-modal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);align-items:center;justify-content:center;padding:20px;transition:background .4s,backdrop-filter .4s}
+.story-modal.open{display:flex;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.story-modal-inner{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);max-width:560px;width:100%;max-height:85vh;overflow-y:auto;position:relative;padding:0;transform:translateY(40px) scale(.95);opacity:0;transition:all .5s cubic-bezier(.16,1,.3,1)}
+.story-modal.open .story-modal-inner{transform:translateY(0) scale(1);opacity:1}
+.story-modal-close{position:sticky;top:0;float:right;background:var(--bg-card);border:none;font-size:28px;color:var(--text-tertiary);cursor:pointer;z-index:2;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:color .2s}
+.story-modal-close:hover{color:var(--text)}
+.story-modal-inner::-webkit-scrollbar{width:4px}
+.story-modal-inner::-webkit-scrollbar-thumb{background:var(--border-hover);border-radius:4px}
+
+/* Story Content Typography */
+.story-header{padding:48px 40px 32px;text-align:center;border-bottom:1px solid var(--border)}
+.story-header .story-emoji{font-size:48px;margin-bottom:16px;display:block}
+.story-header h2{font-size:clamp(22px,5vw,28px);font-weight:800;letter-spacing:-.5px;line-height:1.3;margin-bottom:8px}
+.story-header .story-tagline{font-size:14px;color:var(--text-secondary);font-weight:500}
+.story-body{padding:32px 40px 48px}
+.story-body .story-block{margin-bottom:32px}
+.story-body .story-block:last-child{margin-bottom:0}
+.story-body .story-block h3{font-size:18px;font-weight:800;margin-bottom:12px;letter-spacing:-.3px;display:flex;align-items:center;gap:8px}
+.story-body .story-block h3 .block-dot{width:6px;height:6px;border-radius:50%;background:var(--gradient);flex-shrink:0}
+.story-body p{font-size:15px;color:var(--text-secondary);line-height:1.8;margin-bottom:12px}
+.story-body p:last-child{margin-bottom:0}
+.story-body .story-highlight{background:var(--bg-secondary);border-radius:var(--radius-xs);padding:20px 24px;margin:16px 0;border-left:3px solid var(--blue)}
+.story-body .story-highlight p{font-size:16px;font-weight:600;color:var(--text);line-height:1.7;margin:0}
+.story-body .story-quote{text-align:center;padding:24px 0;font-size:20px;font-weight:800;letter-spacing:-.3px;color:var(--text)}
+.story-mission{text-align:center;padding:32px 40px;background:var(--bg-secondary);border-top:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius)}
+.story-mission .mission-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:8px}
+.story-mission .mission-text{font-size:17px;font-weight:700;line-height:1.6;color:var(--text)}
+
+@media(max-width:600px){
+  .story-cards{grid-template-columns:1fr}
+  .story-header{padding:36px 24px 24px}
+  .story-body{padding:24px}
+  .story-mission{padding:24px}
+  .story-modal-inner{max-height:90vh;border-radius:var(--radius-sm)}
+}
+
 /* ===== CTA BANNER ===== */
 .cta-banner{margin:0 24px 80px;border-radius:var(--radius);padding:64px 40px;background:var(--gradient);position:relative;overflow:hidden;text-align:center}
 .cta-banner .cta-orb{position:absolute;border-radius:50%;opacity:.15;filter:blur(60px)}
@@ -525,6 +576,43 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
+<!-- BRAND STORY -->
+<section class="brand-story">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">즐겁게 모이다</div>
+      <h2 class="section-title">왜 모이다를<br>만들었을까요?</h2>
+      <p class="section-sub">단순한 관리 앱이 아닌, 사람과 사람을 연결하는 서비스를 꿈꿉니다.</p>
+    </div>
+    <div class="story-cards fade-up">
+      <button class="story-card" onclick="openStory('why')">
+        <div class="story-card-icon">💡</div>
+        <div class="story-card-content">
+          <h4>모이다를 만든 이유</h4>
+          <p>편리한 세상 속에서 점점 멀어지는 사람들. 우리가 발견한 문제와 답.</p>
+        </div>
+        <svg class="story-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="story-card" onclick="openStory('vision')">
+        <div class="story-card-icon">🌏</div>
+        <div class="story-card-content">
+          <h4>우리가 꿈꾸는 세상</h4>
+          <p>더 많은 사람이 연결되고, 더 오래 함께하는 세상을 만들어갑니다.</p>
+        </div>
+        <svg class="story-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Brand Story Modal -->
+<div id="storyModal" class="story-modal" onclick="if(event.target===this)closeStory()">
+  <div class="story-modal-inner">
+    <button class="story-modal-close" onclick="closeStory()">&times;</button>
+    <div id="storyContent"></div>
+  </div>
+</div>
+
 <!-- CTA BANNER -->
 <div class="cta-banner fade-up">
   <div class="cta-orb"></div>
@@ -809,6 +897,101 @@ function submitPrereg(e) {
 document.getElementById('preregModal').addEventListener('click', function(e) {
   if (e.target === this) this.style.display = 'none';
 });
+
+// === Brand Story Modal ===
+const storyData = {
+  why: {
+    header: `
+      <div class="story-header">
+        <span class="story-emoji">💡</span>
+        <h2>왜 모이다를 만들었는가</h2>
+        <p class="story-tagline">즐겁게 모이다</p>
+      </div>`,
+    body: `
+      <div class="story-body">
+        <div class="story-block">
+          <p>세상은 점점 편리해지고 있습니다.</p>
+          <p>배달은 집 앞까지 오고, 쇼핑은 클릭 한 번이면 끝나고, 사람들과의 대화도 메신저로 대신할 수 있습니다.</p>
+          <p>하지만 편리함이 늘어날수록, 사람들은 점점 혼자 있는 시간에 익숙해지고 있습니다.</p>
+        </div>
+        <div class="story-block">
+          <h3><span class="block-dot"></span>인간은 본래 사회적 동물입니다</h3>
+          <p>누군가와 함께 운동하고, 취미를 나누고, 같이 무언가를 만들어갈 때 삶은 더욱 풍요롭고 행복해집니다.</p>
+          <p>하지만 새로운 사람을 만나고, 관계를 만들고, 어딘가에 소속되어 활동하는 것이 예전보다 더 어렵고 귀찮게 느껴지는 시대입니다.</p>
+        </div>
+        <div class="story-quote">"사람들이 더 쉽게 만나고,<br>더 자주 어울리며,<br>더 즐겁게 살아갈 수 있는 방법은 없을까?"</div>
+        <div class="story-block">
+          <h3><span class="block-dot"></span>우리가 발견한 문제</h3>
+          <p>좋은 모임은 사람들의 삶을 풍요롭게 만듭니다. 하지만 좋은 모임이 유지되는 것은 생각보다 어렵습니다.</p>
+          <p>공지 작성, 일정 관리, 참석 확인, 회비 수납, 장부 정리. 수많은 일을 누군가가 해야 합니다.</p>
+          <div class="story-highlight">
+            <p>많은 모임이 사라지는 이유는 사람이 없어서가 아니라, 운영이 불편하기 때문입니다.</p>
+          </div>
+        </div>
+        <div class="story-block">
+          <h3><span class="block-dot"></span>그래서 모이다를 만들었습니다</h3>
+          <p>누구나 부담 없이 모임을 만들고, 누구나 쉽게 모임을 운영하며, 누구나 자연스럽게 사람들과 연결될 수 있도록.</p>
+          <p>운영의 불편함을 줄여 더 많은 모임이 생기고, 더 오래 지속될 수 있도록 만드는 것이 우리의 시작점입니다.</p>
+        </div>
+      </div>`,
+    mission: `
+      <div class="story-mission">
+        <div class="mission-label">Mission</div>
+        <p class="mission-text">사람들이 더 많이 만나고,<br>더 오래 함께할 수 있도록<br>모임 운영의 불편함을 없앤다.</p>
+      </div>`
+  },
+  vision: {
+    header: `
+      <div class="story-header">
+        <span class="story-emoji">🌏</span>
+        <h2>우리가 꿈꾸는 세상</h2>
+        <p class="story-tagline">즐겁게 모이다</p>
+      </div>`,
+    body: `
+      <div class="story-body">
+        <div class="story-block">
+          <p>모이다는 단순한 모임 관리 앱이 아닙니다.</p>
+          <p>우리가 만들고 싶은 것은 사람들이 더 많이 연결되는 사회입니다.</p>
+        </div>
+        <div class="story-block">
+          <h3><span class="block-dot"></span>모임이 만드는 변화</h3>
+          <p>누군가는 러닝 모임에서 평생 친구를 만나고, 누군가는 독서 모임에서 새로운 꿈을 찾고, 누군가는 봉사 모임에서 삶의 의미를 발견합니다.</p>
+          <p>그런 만남과 경험이 더 쉽게 시작되고, 더 오래 이어질 수 있도록 돕고 싶습니다.</p>
+        </div>
+        <div class="story-quote">"사람과 사람 사이의 거리를 줄이고,<br>더 많은 연결이 자연스럽게<br>만들어지는 세상."</div>
+        <div class="story-block">
+          <h3><span class="block-dot"></span>함께 만들어가는 문화</h3>
+          <p>우리는 사람들이 고립되지 않고, 함께 웃고, 함께 성장하고, 함께 살아가는 문화를 만들고자 합니다.</p>
+          <div class="story-highlight">
+            <p>모이다는 모임을 관리하는 앱이 아니라, 사람들이 더 연결되는 세상을 만듭니다.</p>
+          </div>
+        </div>
+      </div>`,
+    mission: `
+      <div class="story-mission">
+        <div class="mission-label">Vision</div>
+        <p class="mission-text">사람들이 더 연결되는 세상.<br>즐겁게 모이다.</p>
+      </div>`
+  }
+};
+
+function openStory(key) {
+  const modal = document.getElementById('storyModal');
+  const content = document.getElementById('storyContent');
+  const data = storyData[key];
+  content.innerHTML = data.header + data.body + data.mission;
+  modal.style.display = 'flex';
+  requestAnimationFrame(() => { requestAnimationFrame(() => { modal.classList.add('open'); }); });
+  document.body.style.overflow = 'hidden';
+  trackEvent('story_view', { page_path: '/story_' + key });
+}
+
+function closeStory() {
+  const modal = document.getElementById('storyModal');
+  modal.classList.remove('open');
+  setTimeout(() => { modal.style.display = 'none'; }, 400);
+  document.body.style.overflow = '';
+}
 </script>
 </body>
 </html>
